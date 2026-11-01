@@ -40,11 +40,17 @@ exports live in `assets/img/work/`. Member names in the tables are seed data.
 Confirm the client agreement allows showing it un-named, and add a measured result
 (cycle time, steps removed) to the case-study intro once you have one.
 
-### 3. Domain — `sitemap.xml` and `robots.txt`
+### 3. Domain — done, except the social image
 
-Both contain `REPLACE-WITH-YOUR-DOMAIN`. Also add absolute `og:url` and `canonical` tags
-to each page's `<head>` once the domain exists, plus an `og:image` (1200×630 PNG) — social
-previews need an absolute URL and a raster image, so neither can be filled in yet.
+`sitemap.xml` and `robots.txt` carry the real domain, every page has an absolute
+`canonical` and `og:url`, and `404.html` is marked `noindex`.
+
+Still missing: an `og:image`. Social previews need a raster image (1200×630 PNG) at an
+absolute URL — the SVG mark will not do. Until one exists, links shared to Slack, LinkedIn
+or iMessage will unfurl as plain text with no picture.
+
+Worth doing now that the domain resolves: submit `https://fb-code.com/sitemap.xml` in
+Google Search Console and Bing Webmaster Tools.
 
 ### 4. Commercial terms need your sign-off
 
@@ -58,10 +64,22 @@ confirm each one is what you actually offer, or change it:
 - "Monthly retainer, cancel with notice" (approach)
 - "45-minute first call, no deck" (services, contact)
 
-### 5. Legal pages
+### 5. Legal pages — privacy drafted, needs review
 
-No privacy policy or terms page exists. Add them if you collect form submissions in a
-jurisdiction that requires it, and link them from the footer.
+`privacy.html` exists and is linked from every footer. The data flows in it were checked
+against the code and are accurate: contact form to Formspree, GitHub Pages request logs,
+Google Fonts seeing visitor IPs, and a theme preference in `localStorage`. No analytics,
+no cookies, no trackers — verified, not assumed.
+
+Two blanks are marked in the page and a visible draft notice sits at the top. Fill in the
+**registered address** and a **concrete retention period**, have someone confirm it suits
+the jurisdiction FB Code LLC answers to, then delete the notice.
+
+No terms of service page exists. A brochure site that only takes enquiries usually does
+not need one; add it if you start doing anything transactional here.
+
+If the Google Fonts dependency is unwelcome on privacy grounds, self-hosting the four
+families removes that third party entirely — see the Brand section.
 
 ## Brand
 

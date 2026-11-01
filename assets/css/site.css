@@ -1202,6 +1202,34 @@ p{color:var(--text-dim);}
   .footer-bottom{flex-direction:column;}
 }
 
+/* ---------- Prose (privacy and other long-form pages) ---------- */
+
+.prose{
+  max-width:68ch;
+  display:grid;
+  gap:18px;
+}
+
+.prose h2{
+  margin-top:22px;
+  font-size:clamp(1.25rem, 1.9vw, 1.5rem);
+}
+
+.prose p{color:var(--text-dim);}
+.prose strong{color:var(--text);font-weight:500;}
+
+.prose a{
+  color:var(--text);
+  text-decoration:underline;
+  text-underline-offset:3px;
+  text-decoration-color:var(--rule-strong);
+  transition:text-decoration-color var(--t) var(--ease), color var(--t) var(--ease);
+}
+.prose a:hover{color:var(--accent);text-decoration-color:var(--accent);}
+
+.prose .facts{margin-top:4px;}
+.prose .facts .v{color:var(--text-dim);}
+
 /* ---------- Reveal ----------
    STAGGER_STEP_MS and REVEAL_MS in site.js must match the 70ms steps and --t-slow. */
 
