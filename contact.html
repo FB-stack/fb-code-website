@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Contact — FB Code LLC</title>
+<meta name="description" content="Send FB Code LLC a brief or a process problem. A reply from an engineer within one business day.">
+<meta name="theme-color" content="#08080A">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="FB Code LLC">
+<meta property="og:title" content="Contact — FB Code LLC">
+<meta property="og:description" content="Send FB Code LLC a brief or a process problem. A reply from an engineer within one business day.">
+<script>
+(function(){
+  var root = document.documentElement;
+  root.classList.add("js");
+  var saved = null;
+  try{ saved = localStorage.getItem("fbcode-theme"); }catch(e){}
+  root.setAttribute("data-theme", saved === "light" ? "light" : "dark");
+})();
+</script>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Inter+Tight:wght@500;600;700&family=Instrument+Serif:ital@1&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="assets/css/site.css?v=3">
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="lockup" href="index.html" aria-label="FB Code LLC — home">
+      <span class="mark" aria-hidden="true"></span>
+      <span class="lockup-type">
+        <span class="lockup-name">FB Code</span>
+        <span class="lockup-llc">LLC</span>
+      </span>
+    </a>
+    <nav class="nav" aria-label="Primary">
+      <a href="services.html">Services</a>
+      <a href="work.html">Work</a>
+      <a href="approach.html">Approach</a>
+      <a href="contact.html" aria-current="page">Contact</a>
+    </nav>
+      <div class="header-tools">
+        <button class="theme-btn" type="button" data-theme-toggle aria-label="Switch to light theme" title="Switch to light theme" aria-pressed="false">
+          <svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.6v2.2M12 19.2v2.2M2.6 12h2.2M19.2 12h2.2M5.4 5.4l1.6 1.6M17 17l1.6 1.6M18.6 5.4L17 7M7 17l-1.6 1.6"/></svg>
+          <svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.2 14.9A8.6 8.6 0 0 1 9.1 3.8a8.6 8.6 0 1 0 11.1 11.1Z"/></svg>
+        </button>
+        <a class="btn btn--solid header-cta" href="contact.html">Start a project</a>
+        <button class="menu-btn" type="button" data-menu-button aria-expanded="false" aria-controls="mobile-nav" aria-label="Menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+  </div>
+  <div class="mobile-nav" id="mobile-nav" data-menu-panel>
+    <div class="wrap">
+      <a href="services.html">Services</a>
+      <a href="work.html">Work</a>
+      <a href="approach.html">Approach</a>
+      <a href="contact.html" aria-current="page">Contact</a>
+      <a class="btn btn--solid btn--block" href="contact.html">Start a project</a>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+  <section class="page-hero">
+    <div class="aurora" aria-hidden="true"><i></i><i></i><i></i></div>
+    <div class="grid-lines" aria-hidden="true"></div>
+    <div class="wrap">
+      <p class="crumb"><a href="index.html">Home</a> <span class="sep">/</span> <span>Contact</span></p>
+      <h1>Tell us what needs <em>building.</em></h1>
+      <p class="lede">A brief, a rough problem, or a process that is costing you too much. A reply from an engineer within one business day.</p>
+    </div>
+  </section>
+
+  <section class="section section--flush">
+    <div class="wrap reveal">
+      <div class="contact-grid">
+        <div>
+          <div class="section-head">
+            <h2>Before you write</h2>
+            <span class="num">Useful</span>
+          </div>
+          <ul class="facts reveal stagger">
+            <li><span class="k">Most useful detail</span><span class="v">The process that hurts, and roughly how many people touch it each week.</span></li>
+            <li><span class="k">Not needed yet</span><span class="v">A technical specification. That is what the scope phase produces.</span></li>
+            <li><span class="k">Budget</span><span class="v">A range is enough. It tells us whether to propose a phase or the whole thing.</span></li>
+            <li><span class="k">Response</span><span class="v">One business day, from an engineer rather than an inbox.</span></li>
+            <li><span class="k">First call</span><span class="v">45 minutes. No deck.</span></li>
+          </ul>
+        </div>
+
+        <form class="form" data-contact-form novalidate>
+          <div class="field-row">
+            <label class="field">
+              <span>Name</span>
+              <input type="text" name="name" autocomplete="name" placeholder="Your name" data-required>
+              <span class="field-error" aria-live="polite"></span>
+            </label>
+            <label class="field">
+              <span>Email</span>
+              <input type="email" name="email" autocomplete="email" placeholder="you@company.com" data-required>
+              <span class="field-error" aria-live="polite"></span>
+            </label>
+          </div>
+          <div class="field-row">
+            <label class="field">
+              <span>Company</span>
+              <input type="text" name="company" autocomplete="organization" placeholder="Company, Inc.">
+              <span class="field-error" aria-live="polite"></span>
+            </label>
+            <label class="field">
+              <span>What you need</span>
+              <select name="topic">
+                <option>Scalable platform</option>
+                <option>Automation</option>
+                <option>Process optimization</option>
+                <option>Operate an existing system</option>
+                <option>Not sure yet</option>
+              </select>
+            </label>
+          </div>
+          <label class="field">
+            <span>The problem</span>
+            <textarea name="details" rows="6" placeholder="What the process looks like today, who touches it, and what going well would mean." data-required></textarea>
+            <span class="field-error" aria-live="polite"></span>
+          </label>
+          <label class="hp" aria-hidden="true">Leave this empty<input type="text" name="_gotcha" tabindex="-1"></label>
+          <button class="btn btn--signal btn--block" type="submit">Send it <span class="arrow">→</span></button>
+          <p class="form-note">We reply to every message. Nothing is added to a mailing list.</p>
+          <div class="form-status" role="status" aria-live="polite"></div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-top">
+      <div>
+        <a class="lockup" href="index.html" aria-label="FB Code LLC — home">
+          <span class="mark" aria-hidden="true"></span>
+          <span class="lockup-type">
+            <span class="lockup-name">FB Code</span>
+            <span class="lockup-llc">LLC</span>
+          </span>
+        </a>
+        <p class="footer-blurb">Scalable software, automation, and the process work that makes both of them count.</p>
+      </div>
+      <div class="footer-cols">
+        <div class="footer-col">
+          <span class="label">Company</span>
+          <ul>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="work.html">Work</a></li>
+            <li><a href="approach.html">Approach</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <span class="label">Capabilities</span>
+          <ul>
+            <li><a href="services.html#platforms">Scalable platforms</a></li>
+            <li><a href="services.html#automation">Automation</a></li>
+            <li><a href="services.html#process">Process optimization</a></li>
+            <li><a href="services.html#operate">Operate and scale</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <span class="label">Start</span>
+          <ul>
+            <li><a href="contact.html">Send a brief</a></li>
+            <li><a href="approach.html#scope">Book a scope</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© <span data-year>2026</span> FB Code LLC. All rights reserved.</p>
+      <p>Software that raises output.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/site.js?v=3"></script>
+</body>
+</html>
