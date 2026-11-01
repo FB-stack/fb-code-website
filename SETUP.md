@@ -12,21 +12,23 @@ Deploy by uploading the folder to any static host (Netlify, Cloudflare Pages, Gi
 
 Five things need your input. Nothing else is blocking.
 
-### 1. Contact destination — `assets/js/site.js`
+### 1. Contact destination — done
+
+The form posts to Formspree. The endpoint lives in `assets/js/site.js`:
 
 ```js
 const SITE = {
-  contactEmail: "",   // e.g. "hello@fbcode.dev" — used for the mailto fallback
-  formEndpoint: "",   // e.g. "https://formspree.io/f/xxxxxxx" — used if set
+  contactEmail: "",   // optional mailto fallback, only used when formEndpoint is blank
+  formEndpoint: "https://formspree.io/f/mbggzndn",
 };
 ```
 
-With `formEndpoint` set, the form POSTs JSON and shows an inline confirmation. With only
-`contactEmail` set, it opens the visitor's mail client with the message prefilled. With
-neither set, submitting shows a setup message instead of sending — so set at least one.
+The recipient address is configured in the Formspree dashboard, not here, so it is not
+exposed in the page source. Formspree's free plan is capped (roughly 50 submissions a
+month at time of writing) — check the dashboard if enquiries stop arriving.
 
-On Netlify you can skip the endpoint entirely: add `netlify` to the `<form>` tag in
-`contact.html` and Netlify captures submissions server-side.
+To move off Formspree later, swap `formEndpoint` for any backend that accepts a JSON POST,
+or clear it and set `contactEmail` to fall back to a prefilled mailto.
 
 ### 2. Work page — confirm you can show the access-control project
 

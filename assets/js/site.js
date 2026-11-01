@@ -1,8 +1,8 @@
-/* FB Code LLC — site behaviour. Set the two values in SITE before going live. */
+/* FB Code LLC — site behaviour. Contact form posts to the Formspree endpoint in SITE. */
 
 const SITE = {
   contactEmail: "",
-  formEndpoint: "",
+  formEndpoint: "https://formspree.io/f/mbggzndn",
 };
 
 const Str = {
