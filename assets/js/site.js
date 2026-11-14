@@ -11,6 +11,22 @@ const Str = {
   notBlank(value){
     return !Str.blank(value);
   },
+  escape(value){
+    return String(value)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;");
+  },
+};
+
+const Motion = {
+  reduced(){
+    return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  },
+  finePointer(){
+    return window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+  },
 };
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
@@ -26,8 +42,6 @@ const THEME_SWITCH_MS = 340;
 
 const SEND_FAILED = "That did not send. Check your connection and try again.";
 
-const TAB_STEP = {ArrowDown: 1, ArrowRight: 1, ArrowUp: -1, ArrowLeft: -1};
-const ACTIVE_CLASS = "is-active";
 const SENT_CLASS = "is-sent";
 const SENT_MESSAGE = "Message sent. You will hear back from an engineer within one business day.";
 
@@ -36,7 +50,25 @@ const SPY_MARGIN = "-30% 0px -60% 0px";
 
 const NEED_PARAM = "need";
 
+/* Cloudflare Turnstile. The site key lives on the [data-captcha] slot in contact.html;
+   an empty key leaves the check off. */
+const CAPTCHA_SCRIPT = "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit";
+const CAPTCHA_FIELD = "cf-turnstile-response";
+const CAPTCHA_FULL_WIDTH = 300;
+const CAPTCHA_TRIGGERS = ["focusin", "pointerdown", "input"];
+const CAPTCHA_PENDING = "The spam check above the button has not finished. Give it a moment, then send again.";
+const CAPTCHA_FAILED = "The spam check could not load. Check your connection, or allow challenges.cloudflare.com, and reload.";
+
 const STEP_KEYS = {ArrowLeft: -1, ArrowRight: 1};
+
+const IN_CLASS = "is-in";
+const WORDS_CLASS = "words";
+const OFFSCREEN = "-999px";
+const MAGNET_PULL = 0.22;
+const TILT_DEG = 5;
+const SPOT_SELECTOR = ".spot, .cta .wrap";
+const SPLIT_SELECTOR = "main :is(h1, h2):not([data-no-split]), main [data-split]";
+const HEADING_TAG = /^H[1-6]$/;
 
 function initMobileNav(){
   const button = document.querySelector("[data-menu-button]");
@@ -142,73 +174,154 @@ function initHeader(){
   window.addEventListener("scroll", update, {passive: true});
 }
 
-/* Pointer parallax on the hero mark. Translation only — the mark is never
-   rotated or mirrored, and it never moves on its own. */
-function initHeroParallax(){
-  const hero = document.querySelector(".hero");
-  const mark = hero ? hero.querySelector(".hero-art") : null;
-  if(!hero || !mark){
-    return;
-  }
-  if(window.matchMedia("(prefers-reduced-motion: reduce)").matches){
-    return;
-  }
-  if(!window.matchMedia("(hover: hover) and (pointer: fine)").matches){
+/* The hero follows the pointer: the mark drifts (translation only — it is never
+   rotated or mirrored), the grid brightens around it and lights red beneath it. */
+function initHeroPointer(){
+  if(Motion.reduced() || !Motion.finePointer()){
     return;
   }
 
-  const set = (x, y) => {
-    mark.style.setProperty("--mx", x.toFixed(3));
-    mark.style.setProperty("--my", y.toFixed(3));
-  };
+  document.querySelectorAll(".hero, .page-hero").forEach((hero) => {
+    const mark = hero.querySelector(".hero-art");
 
-  hero.addEventListener("pointermove", (event) => {
-    const box = hero.getBoundingClientRect();
-    set((event.clientX - box.left) / box.width - 0.5, (event.clientY - box.top) / box.height - 0.5);
+    hero.addEventListener("pointermove", (event) => {
+      const box = hero.getBoundingClientRect();
+      const x = event.clientX - box.left;
+      const y = event.clientY - box.top;
+
+      hero.style.setProperty("--px", `${x}px`);
+      hero.style.setProperty("--py", `${y}px`);
+      hero.style.setProperty("--gx", `${((x / box.width) * 100).toFixed(1)}%`);
+      hero.style.setProperty("--gy", `${((y / box.height) * 100).toFixed(1)}%`);
+
+      if(mark){
+        mark.style.setProperty("--mx", (x / box.width - 0.5).toFixed(3));
+        mark.style.setProperty("--my", (y / box.height - 0.5).toFixed(3));
+      }
+    });
+
+    hero.addEventListener("pointerleave", () => {
+      hero.style.setProperty("--px", OFFSCREEN);
+      hero.style.setProperty("--py", OFFSCREEN);
+      hero.style.removeProperty("--gx");
+      hero.style.removeProperty("--gy");
+      if(mark){
+        mark.style.setProperty("--mx", "0");
+        mark.style.setProperty("--my", "0");
+      }
+    });
   });
-
-  hero.addEventListener("pointerleave", () => set(0, 0));
 }
 
-function initShowcase(){
-  document.querySelectorAll("[data-showcase]").forEach((root) => {
-    const tabs = Array.from(root.querySelectorAll("[role=tab]"));
-    const panels = tabs.map((tab) => document.getElementById(tab.getAttribute("aria-controls")));
+function wrapWord(node, index){
+  const word = document.createElement("span");
+  word.className = "w";
+  word.style.setProperty("--i", String(index));
+  word.appendChild(node);
+  return word;
+}
 
-    const select = (index) => {
-      tabs.forEach((tab, i) => {
-        const on = i === index;
-        tab.setAttribute("aria-selected", String(on));
-        tab.tabIndex = on ? 0 : -1;
-        panels[i].classList.toggle(ACTIVE_CLASS, on);
-      });
-    };
+/* Headings arrive a word at a time. The words are wrapped for the eye only:
+   a heading keeps its full text as its accessible name. */
+function splitHeading(heading){
+  const named = HEADING_TAG.test(heading.tagName);
+  const holder = document.createElement("span");
+  let index = 0;
 
-    const move = (index) => {
-      select(index);
-      tabs[index].focus();
-      tabs[index].scrollIntoView({block: "nearest", inline: "nearest"});
-    };
+  Array.from(heading.childNodes).forEach((node) => {
+    if(node.nodeType !== Node.TEXT_NODE){
+      holder.appendChild(wrapWord(node.cloneNode(true), index));
+      index += 1;
+      return;
+    }
+    node.textContent.split(/(\s+)/).forEach((piece) => {
+      if(piece.length === 0){
+        return;
+      }
+      if(Str.blank(piece)){
+        holder.appendChild(document.createTextNode(" "));
+        return;
+      }
+      holder.appendChild(wrapWord(document.createTextNode(piece), index));
+      index += 1;
+    });
+  });
 
-    tabs.forEach((tab, index) => {
-      tab.addEventListener("click", () => select(index));
+  if(named){
+    holder.setAttribute("aria-hidden", "true");
+    heading.setAttribute("aria-label", heading.textContent.replace(/\s+/g, " ").trim());
+  }
+  heading.textContent = "";
+  heading.appendChild(holder);
+  heading.classList.add(WORDS_CLASS);
+}
 
-      tab.addEventListener("keydown", (event) => {
-        if(event.key in TAB_STEP){
-          event.preventDefault();
-          move((index + TAB_STEP[event.key] + tabs.length) % tabs.length);
-          return;
-        }
-        if(event.key === "Home"){
-          event.preventDefault();
-          move(0);
-          return;
-        }
-        if(event.key === "End"){
-          event.preventDefault();
-          move(tabs.length - 1);
-        }
-      });
+function initSplit(){
+  if(Motion.reduced()){
+    return;
+  }
+
+  document.querySelectorAll(SPLIT_SELECTOR).forEach((heading) => {
+    splitHeading(heading);
+    if(!heading.closest(".reveal")){
+      window.requestAnimationFrame(() => heading.classList.add(IN_CLASS));
+    }
+  });
+}
+
+/* Cards with .spot get a red edge that follows the pointer. */
+function initSpot(){
+  if(!Motion.finePointer()){
+    return;
+  }
+
+  document.addEventListener("pointermove", (event) => {
+    const el = event.target instanceof Element ? event.target.closest(SPOT_SELECTOR) : null;
+    if(!el){
+      return;
+    }
+    const box = el.getBoundingClientRect();
+    el.style.setProperty("--sx", `${event.clientX - box.left}px`);
+    el.style.setProperty("--sy", `${event.clientY - box.top}px`);
+  }, {passive: true});
+}
+
+function initMagnet(){
+  if(Motion.reduced() || !Motion.finePointer()){
+    return;
+  }
+
+  document.querySelectorAll(".btn--signal").forEach((button) => {
+    button.addEventListener("pointermove", (event) => {
+      const box = button.getBoundingClientRect();
+      button.style.setProperty("--bx", `${((event.clientX - box.left - box.width / 2) * MAGNET_PULL).toFixed(1)}px`);
+      button.style.setProperty("--by", `${((event.clientY - box.top - box.height / 2) * MAGNET_PULL).toFixed(1)}px`);
+    });
+
+    button.addEventListener("pointerleave", () => {
+      button.style.removeProperty("--bx");
+      button.style.removeProperty("--by");
+    });
+  });
+}
+
+function initTilt(){
+  if(Motion.reduced() || !Motion.finePointer()){
+    return;
+  }
+
+  document.querySelectorAll("[data-tilt]").forEach((el) => {
+    el.addEventListener("pointermove", (event) => {
+      const box = el.getBoundingClientRect();
+      const x = (event.clientX - box.left) / box.width - 0.5;
+      const y = (event.clientY - box.top) / box.height - 0.5;
+      el.style.setProperty("--rx", `${(-y * 2 * TILT_DEG).toFixed(2)}deg`);
+      el.style.setProperty("--ry", `${(x * 2 * TILT_DEG).toFixed(2)}deg`);
+    });
+
+    el.addEventListener("pointerleave", () => {
+      el.style.removeProperty("--rx");
+      el.style.removeProperty("--ry");
     });
   });
 }
@@ -329,10 +442,9 @@ function initReveal(){
     return;
   }
 
-  const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  if(reduced || !("IntersectionObserver" in window)){
+  if(Motion.reduced() || !("IntersectionObserver" in window)){
     targets.forEach((el) => {
-      el.classList.add("is-in");
+      el.classList.add(IN_CLASS);
       el.classList.remove("stagger");
     });
     return;
@@ -341,7 +453,7 @@ function initReveal(){
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
       if(entry.isIntersecting){
-        entry.target.classList.add("is-in");
+        entry.target.classList.add(IN_CLASS);
         observer.unobserve(entry.target);
         settleStagger(entry.target);
       }
@@ -450,7 +562,7 @@ function mailtoFallback(form, payload){
   setStatus(form, "Opening your email client with the message ready to send.", false);
 }
 
-async function postToEndpoint(form, endpoint, payload){
+async function postToEndpoint(form, endpoint, payload, captcha){
   const submit = form.querySelector("[type=submit]");
   const original = submit ? submit.innerHTML : "";
 
@@ -461,10 +573,13 @@ async function postToEndpoint(form, endpoint, payload){
   }
 
   try{
+    const body = new FormData();
+    Object.entries(payload).forEach(([key, value]) => body.append(key, value));
+
     const response = await fetch(endpoint, {
       method: "POST",
-      headers: {"Content-Type": "application/json", Accept: "application/json"},
-      body: JSON.stringify(payload),
+      headers: {Accept: "application/json"},
+      body: body,
     });
 
     if(!response.ok){
@@ -477,12 +592,62 @@ async function postToEndpoint(form, endpoint, payload){
     const direct = Str.notBlank(SITE.contactEmail) ? ` Or email ${SITE.contactEmail}.` : "";
     setStatus(form, SEND_FAILED + direct, true);
   }finally{
+    /* A token is good for one attempt, sent or not. */
+    captcha.reset();
     if(submit){
       submit.disabled = false;
       submit.removeAttribute("aria-busy");
       submit.innerHTML = original;
     }
   }
+}
+
+/* The check is fetched only once someone starts on the form, so no other page,
+   and no visit that never touches the form, calls Cloudflare. */
+function initCaptcha(form){
+  const slot = form.querySelector("[data-captcha]");
+  const key = slot ? slot.getAttribute("data-sitekey") : "";
+  const captcha = {
+    enabled: Str.notBlank(key),
+    reset(){},
+  };
+  if(!captcha.enabled){
+    return captcha;
+  }
+
+  let widget = null;
+  let requested = false;
+  slot.hidden = false;
+
+  captcha.reset = () => {
+    if(widget !== null){
+      window.turnstile.reset(widget);
+    }
+  };
+
+  const load = () => {
+    if(requested){
+      return;
+    }
+    requested = true;
+
+    const script = document.createElement("script");
+    script.src = CAPTCHA_SCRIPT;
+    script.async = true;
+    script.addEventListener("load", () => {
+      slot.textContent = "";
+      widget = window.turnstile.render(slot, {
+        sitekey: key,
+        theme: currentTheme(),
+        size: slot.clientWidth < CAPTCHA_FULL_WIDTH ? "compact" : "flexible",
+      });
+    });
+    script.addEventListener("error", () => setStatus(form, CAPTCHA_FAILED, true));
+    document.head.appendChild(script);
+  };
+
+  CAPTCHA_TRIGGERS.forEach((trigger) => form.addEventListener(trigger, load));
+  return captcha;
 }
 
 /* Service pages link here with ?need=<slug>, which preselects the matching option. */
@@ -511,6 +676,8 @@ function initForm(){
 
   /* Without JavaScript the browser validates and posts the form itself. */
   form.noValidate = true;
+
+  const captcha = initCaptcha(form);
 
   form.querySelectorAll("[data-required]").forEach((input) => {
     input.addEventListener("input", () => clearFieldError(input));
@@ -543,9 +710,15 @@ function initForm(){
       }
     });
 
+    if(captcha.enabled && Str.blank(payload[CAPTCHA_FIELD])){
+      setStatus(form, CAPTCHA_PENDING, true);
+      return;
+    }
+
     const endpoint = form.getAttribute("action");
     if(Str.notBlank(endpoint)){
-      postToEndpoint(form, endpoint, payload);
+      clearStatus(form);
+      postToEndpoint(form, endpoint, payload, captcha);
       return;
     }
     mailtoFallback(form, payload);
@@ -561,8 +734,11 @@ function initYear(){
 initTheme();
 initMobileNav();
 initHeader();
-initHeroParallax();
-initShowcase();
+initHeroPointer();
+initSplit();
+initSpot();
+initMagnet();
+initTilt();
 initSpy();
 initZoom();
 initReveal();

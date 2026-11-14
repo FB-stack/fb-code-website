@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Process map — FB Code LLC</title>
+<meta name="description" content="A one-page first draft of a process: its steps, who does them, how long they take and where the work waits. Made in the browser, printable, shareable by link.">
+<meta name="theme-color" content="#08080A">
+<link rel="canonical" href="https://fb-code.com/map">
+<meta property="og:url" content="https://fb-code.com/map">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="FB Code LLC">
+<meta property="og:title" content="Process map — FB Code LLC">
+<meta property="og:description" content="A one-page first draft of a process: its steps, who does them, how long they take and where the work waits.">
+<meta property="og:image" content="https://fb-code.com/assets/img/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="FB Code LLC — software that raises your output">
+<meta name="twitter:card" content="summary_large_image">
+<script>
+(function(){
+  var root = document.documentElement;
+  root.classList.add("js");
+  var theme = null;
+  var map = null;
+  try{
+    theme = localStorage.getItem("fbcode-theme");
+    map = localStorage.getItem("fbcode-map");
+  }catch(e){}
+  root.setAttribute("data-theme", theme === "light" ? "light" : "dark");
+  if(map){
+    root.classList.add("has-map");
+  }
+  var clean = location.pathname.replace(/(^|\/)index\.html$/, "$1").replace(/\.html$/, "");
+  if(clean !== location.pathname){
+    try{ history.replaceState(null, "", clean + location.search + location.hash); }catch(e){}
+  }
+})();
+</script>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preload" href="assets/fonts/inter-tight.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/inter.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/css/site.css?v=9">
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="lockup" href="./" aria-label="FB Code LLC — home">
+      <span class="mark" aria-hidden="true"></span>
+      <span class="lockup-type">
+        <span class="lockup-name">FB Code</span>
+        <span class="lockup-llc">LLC</span>
+      </span>
+    </a>
+    <nav class="nav" aria-label="Primary">
+      <a href="services">Services</a>
+      <a href="work">Work</a>
+      <a href="approach">Approach</a>
+      <a href="contact">Contact</a>
+    </nav>
+      <div class="header-tools">
+        <a class="map-chip" href="map" data-map-chip hidden><span data-map-chip-text>Your map</span></a>
+        <button class="theme-btn" type="button" data-theme-toggle aria-label="Switch to light theme" title="Switch to light theme" aria-pressed="false">
+          <svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.6v2.2M12 19.2v2.2M2.6 12h2.2M19.2 12h2.2M5.4 5.4l1.6 1.6M17 17l1.6 1.6M18.6 5.4L17 7M7 17l-1.6 1.6"/></svg>
+          <svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.2 14.9A8.6 8.6 0 0 1 9.1 3.8a8.6 8.6 0 1 0 11.1 11.1Z"/></svg>
+        </button>
+        <a class="btn btn--solid header-cta" href="contact">Start a project</a>
+        <button class="menu-btn" type="button" data-menu-button aria-expanded="false" aria-controls="mobile-nav" aria-label="Menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+  </div>
+  <div class="mobile-nav" id="mobile-nav" data-menu-panel>
+    <div class="wrap">
+      <a href="services">Services</a>
+      <a href="work">Work</a>
+      <a href="approach">Approach</a>
+      <a href="contact">Contact</a>
+      <a href="map" data-map-chip hidden>Your map</a>
+      <a class="btn btn--solid btn--block" href="contact">Start a project</a>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+  <section class="page-hero page-hero--slim">
+    <div class="aurora" aria-hidden="true"><i></i><i></i><i></i></div>
+    <div class="grid-lines" aria-hidden="true"></div>
+    <div class="wrap">
+      <p class="crumb"><a href="./">Home</a> <span class="sep">/</span> <span>Process map</span></p>
+      <h1>The map, on one <em>page.</em></h1>
+      <p class="lede">A first draft of how the work moves, made from what was typed into the mapper. Print it, save it as a PDF, or send someone the link.</p>
+    </div>
+  </section>
+
+  <section class="section section--flush">
+    <div class="wrap">
+      <div class="sheet-wrap" data-map-doc data-source="example">
+        <div class="sheet-tools">
+          <p class="sheet-source">
+            <span data-when="example">This is the example. <a class="section-link" href="./#mapper">Map your own →</a></span>
+            <span data-when="own">Your map, saved in this browser only.</span>
+            <span data-when="shared">A map someone shared with you. It lives in the link, not on a server.</span>
+          </p>
+          <button class="btn btn--ghost" type="button" data-doc-print>Print or save as PDF</button>
+          <button class="btn btn--ghost" type="button" data-doc-copy>Copy link</button>
+          <a class="btn btn--ghost" href="./#mapper" data-doc-adopt>Edit</a>
+          <a class="btn btn--signal" href="contact" data-doc-adopt>Send with a brief <span class="arrow">→</span></a>
+        </div>
+
+        <article class="sheet paper">
+          <header class="sheet-head">
+            <span class="lockup">
+              <span class="mark" aria-hidden="true"></span>
+              <span class="lockup-type">
+                <span class="lockup-name">FB Code</span>
+                <span class="lockup-llc">LLC</span>
+              </span>
+            </span>
+            <p class="sheet-meta">
+              <span class="label label--signal">Process map · first draft</span>
+              <span class="label" data-doc-date></span>
+            </p>
+          </header>
+
+          <h2 class="sheet-title" data-no-split data-doc-title>One order, from “Order comes in” to “Confirmation sent”</h2>
+          <p class="sheet-sub"><span data-doc-volume>40 a week</span>. Timings are estimates, as entered.</p>
+
+          <div class="sheet-figures">
+            <div><strong data-map-week>20 h</strong><span>of hands-on work a week</span></div>
+            <div><strong data-map-manual>4 of 5</strong><span>steps done by hand</span></div>
+            <div><strong data-map-cycle>1 d 5 h</strong><span data-map-cycle-line>end to end, per order</span></div>
+          </div>
+
+          <div class="sheet-table-wrap">
+            <table class="sheet-table">
+              <thead>
+                <tr>
+                  <th scope="col" aria-label="Number"></th>
+                  <th scope="col">Step</th>
+                  <th scope="col">Done</th>
+                  <th scope="col">Hands-on</th>
+                  <th scope="col">Waits first</th>
+                </tr>
+              </thead>
+              <tbody data-doc-rows>
+                <tr><td class="num">01</td><th scope="row">Order comes in</th><td>Automatic</td><td>—</td><td>—</td></tr>
+                <tr class="is-hand"><td class="num">02</td><th scope="row">Copied into the order system</th><td>By hand</td><td>10 min</td><td>1 h</td></tr>
+                <tr class="is-hand"><td class="num">03</td><th scope="row">Approved by a manager</th><td>By hand</td><td>5 min</td><td>1 d</td></tr>
+                <tr class="is-hand"><td class="num">04</td><th scope="row">Re-keyed into invoicing</th><td>By hand</td><td>10 min</td><td>4 h</td></tr>
+                <tr class="is-hand"><td class="num">05</td><th scope="row">Confirmation sent</th><td>By hand</td><td>5 min</td><td>—</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="sheet-block">
+            <h3 data-map-bar-title>Where one order spends its time</h3>
+            <div class="bar" data-map-bar role="img" aria-label="Of 1 d 5 h end to end, 30 min is someone working and 1 d 5 h is waiting."><i class="bar-wait" style="width:4.53%"></i><i class="bar-work" style="width:2.01%"></i><i class="bar-wait" style="width:74.31%"></i><i class="bar-work" style="width:1.75%"></i><i class="bar-wait" style="width:13.64%"></i><i class="bar-work" style="width:2.01%"></i><i class="bar-work" style="width:1.75%"></i></div>
+            <p class="bar-key"><span class="key-work">Someone working</span><span class="key-wait">Waiting</span></p>
+            <p data-map-insight>The work is 30 min. The waiting is 1 d 5 h.</p>
+          </div>
+
+          <div class="sheet-block">
+            <h3>Where we would look first</h3>
+            <ul class="sheet-look" data-doc-look>
+              <li>The longest wait is <strong>1 d</strong>, before “Approved by a manager”. Start by asking what the order is waiting for there.</li>
+              <li><strong>4 of 5</strong> steps are done by hand, <strong>20 h</strong> a week between them. Ask which of them only move information from one place to another.</li>
+              <li>One order takes <strong>1 d 5 h</strong>, of which <strong>30 min</strong> is work. The rest is the order sitting still.</li>
+            </ul>
+          </div>
+
+          <p class="sheet-foot">A first draft, made on fb-code.com from estimates. The real map comes from sitting with the people who do the work and timing it. This page makes no promise about what can be removed.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section cta">
+    <div class="wrap reveal">
+      <div>
+        <h2>Bring it to the first <em>call.</em></h2>
+        <p>Send the map with a few lines on what it cannot say. A reply from an engineer within one business day.</p>
+      </div>
+      <a class="btn btn--signal" href="contact">Send the map <span class="arrow">→</span></a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-top">
+      <div>
+        <a class="lockup" href="./" aria-label="FB Code LLC — home">
+          <span class="mark" aria-hidden="true"></span>
+          <span class="lockup-type">
+            <span class="lockup-name">FB Code</span>
+            <span class="lockup-llc">LLC</span>
+          </span>
+        </a>
+        <p class="footer-blurb">Scalable software, automation, and the process work that makes both of them count.</p>
+      </div>
+      <div class="footer-cols">
+        <div class="footer-col">
+          <span class="label">Company</span>
+          <ul>
+            <li><a href="services">Services</a></li>
+            <li><a href="work">Work</a></li>
+            <li><a href="approach">Approach</a></li>
+            <li><a href="contact">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <span class="label">Capabilities</span>
+          <ul>
+            <li><a href="services#platforms">Scalable platforms</a></li>
+            <li><a href="services#automation">Automation</a></li>
+            <li><a href="services#process">Process optimization</a></li>
+            <li><a href="services#operate">Operate and scale</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <span class="label">Start</span>
+          <ul>
+            <li><a href="./#mapper">Map a process</a></li>
+            <li><a href="contact">Send a brief</a></li>
+            <li><a href="approach#scope">Book a scope</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© <span data-year>2026</span> FB Code LLC. All rights reserved.</p>
+      <p><a href="privacy">Privacy</a></p>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/site.js?v=9"></script>
+<script src="assets/js/map.js?v=9"></script>
+</body>
+</html>

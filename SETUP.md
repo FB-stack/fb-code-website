@@ -1,17 +1,29 @@
 # FB Code LLC — website
 
-Static site. No build step, no dependencies. Open `index.html` or serve the folder.
+Static site. No build step, no dependencies.
 
 ```bash
-python3 -m http.server 4173
+npx serve -l 4173
 ```
 
-Deploy by uploading the folder to any static host (Netlify, Cloudflare Pages, GitHub Pages, S3 + CloudFront).
+Use a server that resolves `/services` to `services.html` (`serve` does; `python3 -m
+http.server` does not), because every link on the site is written without the extension.
+
+Deploys from `main` on GitHub Pages.
+
+## Addresses without `.html`
+
+GitHub Pages serves `services.html` at `/services` on its own, so nothing is configured:
+the links, canonical tags and sitemap simply leave the extension off. The old `.html`
+addresses still resolve, and a line in each page's head script rewrites the address bar
+to the clean form. A new page only has to be linked without its extension. On another
+host, turn on its "clean URLs" option (Netlify and Cloudflare Pages do this by default).
 
 ## Before it goes live
 
-Three things need your input: the Work page (2), the commercial terms (4) and a read of
-the privacy page (5). Nothing else is blocking.
+Four things need your input: the Work page and its demo console (2), the commercial
+terms (4), a read of the privacy page (5) and the wording around the process map (6).
+Nothing else is blocking.
 
 ### 1. Contact destination — done
 
@@ -29,13 +41,40 @@ The recipient address is configured in the Formspree dashboard, not here, so it 
 exposed in the page source. Formspree's free plan is capped (roughly 50 submissions a
 month at time of writing) — check the dashboard if enquiries stop arriving.
 
+**Spam check (Cloudflare Turnstile) — wired in, switched off until you add keys.** The
+form already has a honeypot field; this adds a real check. To turn it on:
+
+1. In the Cloudflare dashboard, open Turnstile and add a widget. Allowed domain:
+   `fb-code.com` (add `localhost` if you want to test locally). Mode: Managed. Copy the
+   **Site Key** and the **Secret Key**.
+2. In the Formspree dashboard, open the form's settings, CAPTCHA section, choose
+   "Cloudflare Turnstile" and paste the **Secret Key**.
+3. In `contact.html`, paste the **Site Key** into the slot above the submit button:
+   `<div class="captcha" data-captcha data-sitekey="YOUR-SITE-KEY" hidden>`.
+
+Do steps 2 and 3 together. With the key in the page but not in Formspree, the check shows
+but nothing verifies it; with Formspree enforcing it and no key in the page, submissions
+carry no token.
+
+How it behaves (`initCaptcha` in `site.js`): the Cloudflare script is fetched only when a
+visitor first focuses, taps or types in the form, so no other page and no idle visit
+calls Cloudflare. Sending is held until the check has passed, the token goes to Formspree
+as `cf-turnstile-response`, and the widget is reset after every attempt. On screens too
+narrow for the full widget it uses the compact size. The form is now posted as form data
+rather than JSON, which is the shape Formspree documents for Turnstile.
+
+Once the check is on, the form needs JavaScript: the widget cannot run without it, so the
+no-JavaScript path described above will no longer get a message through. Formspree's docs
+do not say how a submission without a token is answered. The privacy page already lists
+Cloudflare; if you decide not to turn the check on, remove that entry.
+
 To move off Formspree later, point the `action` at any backend that accepts a JSON POST
 (and a plain form POST, for the no-JavaScript path), or remove the `action` and set
 `contactEmail` in `assets/js/site.js` to fall back to a prefilled mailto.
 
 ### 2. Work page — confirm you can show the access-control project
 
-`work.html` and the home page's showcase show six screens of the multi-site
+`work.html` shows six screens of the multi-site
 access-control console (from `~/Desktop/AccessControl/pitch-images`). The product logo,
 user avatar, demo email addresses and the localhost status bar were painted out; the
 exports live in `assets/img/work/`. Member names in the tables are seed data.
@@ -49,7 +88,13 @@ the system's documentation: doors and controllers at each site, one edge device 
 reporting in, an event pipeline, then members, plans and payments, then the console. Correct
 it if the real topology differs, and check the client is comfortable with it being shown. The site makes no numeric claims
 about the project; once there is a measured result (cycle time, steps removed), add it to
-the case-study intro on `work.html` and under the home page showcase.
+the case-study intro on `work.html`.
+
+The home page and `work.html` also carry a **working model of the console**
+(`assets/js/demo.js`): six invented doors on two invented sites, labelled "Demo data".
+Only the visitor's clicks create events; nothing is simulated in the background and no
+client data is involved. Confirm the client is comfortable with a model of their product's
+idea being shown, as with the screenshots.
 
 ### 3. Domain — done
 
@@ -84,8 +129,9 @@ these in one place each. If a term changes, change it there too.
 ### 5. Privacy page — live, worth one read
 
 `privacy.html` is linked from every footer and no longer carries a draft notice. The data
-flows in it were checked against the code: contact form to Formspree, GitHub Pages request
-logs, and a theme preference in `localStorage`. No analytics, no cookies, no trackers, and
+flows in it were checked against the code: contact form to Formspree (with the process map
+when one is attached), the Turnstile check on that form, GitHub Pages request logs, and a theme preference and the visitor's
+process map in `localStorage`. No analytics, no cookies, no trackers, and
 since the fonts moved onto the site, no third-party requests at all apart from the form.
 
 Two things were written to avoid needing details that were not available:
@@ -100,6 +146,29 @@ It has not been reviewed by a lawyer.
 
 No terms of service page exists. A brochure site that only takes enquiries usually does
 not need one; add it if you start doing anything transactional here.
+
+### 6. The process map — wording to confirm
+
+The home page hero is a working process mapper (`assets/js/map.js`). A visitor edits an
+example process and the page totals hands-on hours a week, steps done by hand and
+end-to-end time from what they typed. Every figure on screen is the visitor's own
+arithmetic; the site still makes no claim about results.
+
+- The example (an order process, 40 a week, five steps) is `EXAMPLE_MAP` in `map.js`. The
+  same figures are written into `index.html` and `map.html` for visitors without
+  JavaScript, so change both together.
+- The map is saved in the visitor's browser (`localStorage`, `fbcode-map`). It reaches you
+  only when they send the contact form with it attached: the enquiry then carries
+  `process_map` (a plain-text summary) and `process_map_link` (a link that reopens it on
+  `/map`). "Do not send it" on the contact page detaches it for that message.
+- `/map` is the one-page version: printable, and shareable by a link that holds the whole
+  map after the `#`, so nothing is stored on a server.
+- Once a visitor has a map, the header shows a "Your map" chip on every page, Services
+  shows a strip built from it, and the "What you keep" cards on home fill in from it.
+- Copy to check: "A couple of minutes" (services, approach, contact), the "Where we would
+  look first" notes on `/map` (questions, not promises), and the three document cards on
+  home. The spec and report cards show only what the site already said those documents
+  contain; swap in real samples when you have ones you can show.
 
 ## Brand
 
@@ -141,25 +210,31 @@ blocks at the top of `site.css`; a `.paper` section inverts whichever ground the
 
 ## Motion
 
-- Hero: the mark's red outline draws itself on load, then the solid mark rises in; drifting
-  red aurora behind it; the mark follows the pointer by up to 18px. Below 900px the mark is
-  outline-only and sits behind the copy.
-- Home showcase: six tabs switch one large screenshot (`initShowcase` in `site.js`). Without
-  JavaScript the tabs are hidden and all six screens show in sequence.
-- Screenshots on home and Work open full size in a dialog (`data-zoom`, `initZoom`); the
-  arrows and the left/right keys step through every screenshot on the page.
+- Hero (home): the mark's red outline draws itself behind the mapper; drifting red aurora;
+  the grid lights red under the pointer and the mark drifts with it (`initHeroPointer`).
+  Inner-page heroes get the same grid light.
+- Headings arrive a word at a time (`initSplit`; the `.words` class). The heading keeps its
+  full text as its accessible name.
+- Mapper: totals count up or down when a value changes, bar segments resize in place, a
+  marker crosses the bar, and a highlight circles the result panel. Below 1100px the
+  headline figures ride in a bar pinned to the bottom of the screen while steps are edited.
+- Console: a door swings open, a dot flies from the door to the log, the event row drops
+  in; a revoked card shakes the console.
+- Cards with `.spot` get a red edge that follows the pointer; `[data-tilt]` cards lean
+  toward it; signal buttons pull slightly toward it (`initSpot`, `initTilt`, `initMagnet`).
+- A red line under the header shows how far down the page the reader is (CSS scroll
+  timeline; absent in browsers without it).
+- Screenshots on Work open full size in a dialog (`data-zoom`, `initZoom`); the arrows and
+  the left/right keys step through every screenshot on the page.
 - Timeline: the red line draws through the five steps when it scrolls into view — across the
   page on home, down a vertical rail on Approach (`.timeline--rail`).
-- Home process illustration (`.flow`): one marker stalls its way through the manual lane
-  while three pass through the automated one. Pure CSS, driven by the registered `--p`
-  property.
 - Home FAQ: native `<details>`, no JavaScript.
 - Services: the left-hand index is sticky and highlights the section in view (`initSpy`).
 - Work system diagram (`.arch`): a red dot travels each connector.
 - Approach, "What we measure": each measure has a small inline SVG showing what the number
   tracks (`.measure-glyph`); the red stroke draws in on scroll.
 - Contact: on success the form is replaced by a "Message sent" panel (`showSent`). Each
-  service on `services.html` links to `contact.html?need=<slug>`, which preselects the
+  service on `services.html` links to `contact?need=<slug>`, which preselects the
   matching "What you need" option (`initNeed`; slugs are the `data-need` attributes).
 - Pages cross-fade on navigation (`@view-transition` in `site.css`) where the browser
   supports it.
@@ -167,5 +242,12 @@ blocks at the top of `site.css`; a `.paper` section inverts whichever ground the
 - Stack: an infinite marquee, paused on hover.
 - Scroll reveal and stagger: `STAGGER_STEP_MS` / `REVEAL_MS` in `site.js` must match the CSS.
 
-Under `prefers-reduced-motion: reduce` the aurora, marquee, draw-on, lifts, parallax, page
-cross-fade and the moving markers in the two diagrams are all switched off.
+Scripts load in order: `site.js`, then `map.js` (every page), then `demo.js` (home and
+Work). The later two use `Str` and `Motion` from `site.js`.
+
+Without JavaScript the mapper shows the example as a static table with its totals, the
+console shows its doors with a note, and `/map` shows the example map.
+
+Under `prefers-reduced-motion: reduce` the aurora, marquee, draw-on, word-by-word headings,
+tilt, button pull, bar marker, panel highlight, flying dot, parallax, page cross-fade and
+the moving markers in the diagram are all switched off.

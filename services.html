@@ -6,8 +6,8 @@
 <title>Services — FB Code LLC</title>
 <meta name="description" content="Scalable platforms, automation, process optimization, operations, product interfaces, and reporting. What FB Code LLC builds and how an engagement runs.">
 <meta name="theme-color" content="#08080A">
-<link rel="canonical" href="https://fb-code.com/services.html">
-<meta property="og:url" content="https://fb-code.com/services.html">
+<link rel="canonical" href="https://fb-code.com/services">
+<meta property="og:url" content="https://fb-code.com/services">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="FB Code LLC">
 <meta property="og:title" content="Services — FB Code LLC">
@@ -21,16 +21,27 @@
 (function(){
   var root = document.documentElement;
   root.classList.add("js");
-  var saved = null;
-  try{ saved = localStorage.getItem("fbcode-theme"); }catch(e){}
-  root.setAttribute("data-theme", saved === "light" ? "light" : "dark");
+  var theme = null;
+  var map = null;
+  try{
+    theme = localStorage.getItem("fbcode-theme");
+    map = localStorage.getItem("fbcode-map");
+  }catch(e){}
+  root.setAttribute("data-theme", theme === "light" ? "light" : "dark");
+  if(map){
+    root.classList.add("has-map");
+  }
+  var clean = location.pathname.replace(/(^|\/)index\.html$/, "$1").replace(/\.html$/, "");
+  if(clean !== location.pathname){
+    try{ history.replaceState(null, "", clean + location.search + location.hash); }catch(e){}
+  }
 })();
 </script>
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="preload" href="assets/fonts/inter-tight.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/inter.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/css/site.css?v=8">
+<link rel="stylesheet" href="assets/css/site.css?v=9">
 </head>
 <body>
 
@@ -38,7 +49,7 @@
 
 <header class="site-header">
   <div class="wrap">
-    <a class="lockup" href="index.html" aria-label="FB Code LLC — home">
+    <a class="lockup" href="./" aria-label="FB Code LLC — home">
       <span class="mark" aria-hidden="true"></span>
       <span class="lockup-type">
         <span class="lockup-name">FB Code</span>
@@ -46,17 +57,18 @@
       </span>
     </a>
     <nav class="nav" aria-label="Primary">
-      <a href="services.html" aria-current="page">Services</a>
-      <a href="work.html">Work</a>
-      <a href="approach.html">Approach</a>
-      <a href="contact.html">Contact</a>
+      <a href="services" aria-current="page">Services</a>
+      <a href="work">Work</a>
+      <a href="approach">Approach</a>
+      <a href="contact">Contact</a>
     </nav>
       <div class="header-tools">
+        <a class="map-chip" href="map" data-map-chip hidden><span data-map-chip-text>Your map</span></a>
         <button class="theme-btn" type="button" data-theme-toggle aria-label="Switch to light theme" title="Switch to light theme" aria-pressed="false">
           <svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.6v2.2M12 19.2v2.2M2.6 12h2.2M19.2 12h2.2M5.4 5.4l1.6 1.6M17 17l1.6 1.6M18.6 5.4L17 7M7 17l-1.6 1.6"/></svg>
           <svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.2 14.9A8.6 8.6 0 0 1 9.1 3.8a8.6 8.6 0 1 0 11.1 11.1Z"/></svg>
         </button>
-        <a class="btn btn--solid header-cta" href="contact.html">Start a project</a>
+        <a class="btn btn--solid header-cta" href="contact">Start a project</a>
         <button class="menu-btn" type="button" data-menu-button aria-expanded="false" aria-controls="mobile-nav" aria-label="Menu">
           <span></span><span></span><span></span>
         </button>
@@ -64,11 +76,12 @@
   </div>
   <div class="mobile-nav" id="mobile-nav" data-menu-panel>
     <div class="wrap">
-      <a href="services.html" aria-current="page">Services</a>
-      <a href="work.html">Work</a>
-      <a href="approach.html">Approach</a>
-      <a href="contact.html">Contact</a>
-      <a class="btn btn--solid btn--block" href="contact.html">Start a project</a>
+      <a href="services" aria-current="page">Services</a>
+      <a href="work">Work</a>
+      <a href="approach">Approach</a>
+      <a href="contact">Contact</a>
+      <a href="map" data-map-chip hidden>Your map</a>
+      <a class="btn btn--solid btn--block" href="contact">Start a project</a>
     </div>
   </div>
 </header>
@@ -79,7 +92,7 @@
     <div class="aurora" aria-hidden="true"><i></i><i></i><i></i></div>
     <div class="grid-lines" aria-hidden="true"></div>
     <div class="wrap">
-      <p class="crumb"><a href="index.html">Home</a> <span class="sep">/</span> <span>Services</span></p>
+      <p class="crumb"><a href="./">Home</a> <span class="sep">/</span> <span>Services</span></p>
       <h1>Six things we are <em>actually</em> good at.</h1>
       <p class="lede">Every engagement is some combination of these. We would rather say no to the rest than learn it on your budget.</p>
     </div>
@@ -87,6 +100,20 @@
 
   <section class="section section--flush">
     <div class="wrap">
+      <aside class="map-strip" data-map-own hidden>
+        <span class="label label--signal">From your map</span>
+        <p><strong data-map-manual></strong> steps by hand, <strong data-map-week></strong> a week. <span data-map-longest></span> The by-hand steps are what Automation is for; the waits are what Process optimization is for.</p>
+        <span class="map-strip-links">
+          <a class="section-link" href="#automation">Automation →</a>
+          <a class="section-link" href="#process">Process optimization →</a>
+          <a class="section-link" href="map">Open your map →</a>
+        </span>
+      </aside>
+      <aside class="map-strip" data-map-none>
+        <span class="label">Not sure which one</span>
+        <p>Map one process first. It takes a couple of minutes, and nothing is sent anywhere.</p>
+        <a class="section-link" href="./#mapper">Map a process →</a>
+      </aside>
       <div class="svc reveal">
         <nav class="showcase-tabs svc-index" aria-label="Services on this page">
           <a class="showcase-tab" href="#platforms" data-spy-link aria-current="true"><span class="num">01</span><span class="showcase-tab-title">Scalable platforms</span></a>
@@ -102,42 +129,42 @@
             <h2>Scalable platforms</h2>
             <p>Most systems are not slow because of the language they are written in. They are slow because the data model, the boundaries, and the deployment were chosen for the first version and never revisited. We design those three first, then build against them.</p>
             <ul class="svc-tags"><li>Java and .NET services</li><li>Python and Node services</li><li>Relational and document schema design</li><li>Versioned migrations</li><li>REST and event APIs</li><li>Containerised deploys</li><li>Load and capacity testing</li></ul>
-            <a class="section-link" href="contact.html?need=platforms">Start with this →</a>
+            <a class="section-link" href="contact?need=platforms">Start with this →</a>
           </article>
           <article class="svc-item" id="automation">
             <span class="num">02</span>
             <h2>Automation</h2>
             <p>The expensive part of most operations is the gap between two systems that a person closes by hand — copying a number, chasing an approval, re-keying a document. We close those gaps with software that runs on an event rather than on a reminder.</p>
             <ul class="svc-tags"><li>System-to-system integrations</li><li>Event-driven jobs</li><li>Document and data pipelines</li><li>Approval and routing flows</li><li>Scheduled reconciliation</li><li>Third-party API adapters</li></ul>
-            <a class="section-link" href="contact.html?need=automation">Start with this →</a>
+            <a class="section-link" href="contact?need=automation">Start with this →</a>
           </article>
           <article class="svc-item" id="process">
             <span class="num">03</span>
             <h2>Process optimization</h2>
             <p>We start by watching the work, not the wiring diagram. Once the real path is written down with timings, the bottleneck is usually somewhere nobody nominated. Then we decide what is worth automating and what should simply stop being done.</p>
             <ul class="svc-tags"><li>Process mapping with timings</li><li>Baseline measurement</li><li>Bottleneck analysis</li><li>Build-or-drop decisions</li><li>Rollout and training</li><li>Before-and-after reporting</li></ul>
-            <a class="section-link" href="contact.html?need=process">Start with this →</a>
+            <a class="section-link" href="contact?need=process">Start with this →</a>
           </article>
           <article class="svc-item" id="operate">
             <span class="num">04</span>
             <h2>Operate and scale</h2>
             <p>Software that nobody owns degrades quietly. A retainer keeps a named engineer on the account who already knows the system, so the answer to an incident is a fix rather than an onboarding.</p>
             <ul class="svc-tags"><li>Monitoring and alerting</li><li>Incident response</li><li>Dependency and security upgrades</li><li>Performance tuning</li><li>Capacity planning</li><li>Monthly written report</li></ul>
-            <a class="section-link" href="contact.html?need=operate">Start with this →</a>
+            <a class="section-link" href="contact?need=operate">Start with this →</a>
           </article>
           <article class="svc-item" id="frontend">
             <span class="num">05</span>
             <h2>Product interfaces</h2>
             <p>Internal tools get used all day by people who did not choose them. We build the front end with the same care as a customer-facing product, because a tool that fights its operator adds the manual steps back in.</p>
             <ul class="svc-tags"><li>React and TypeScript</li><li>Dashboards and back-office tools</li><li>Design systems</li><li>Accessibility to WCAG AA</li><li>Offline-tolerant clients</li><li>Mobile web</li></ul>
-            <a class="section-link" href="contact.html?need=frontend">Start with this →</a>
+            <a class="section-link" href="contact?need=frontend">Start with this →</a>
           </article>
           <article class="svc-item" id="data">
             <span class="num">06</span>
             <h2>Data and reporting</h2>
             <p>You cannot optimise a process you cannot see. We put the operational numbers somewhere the people accountable for them can read without asking anyone.</p>
             <ul class="svc-tags"><li>Reporting schemas</li><li>Operational dashboards</li><li>Scheduled extracts</li><li>Data quality checks</li><li>Audit trails</li><li>Export and archival</li></ul>
-            <a class="section-link" href="contact.html?need=data">Start with this →</a>
+            <a class="section-link" href="contact?need=data">Start with this →</a>
           </article>
         </div>
       </div>
@@ -166,7 +193,7 @@
         <h2>Not sure which of these you need?</h2>
         <p>Describe the process that is costing you the most. We will tell you which of the six applies, and if none of them do.</p>
       </div>
-      <a class="btn btn--signal" href="contact.html">Start a project <span class="arrow">→</span></a>
+      <a class="btn btn--signal" href="contact">Start a project <span class="arrow">→</span></a>
     </div>
   </section>
 
@@ -176,7 +203,7 @@
   <div class="wrap">
     <div class="footer-top">
       <div>
-        <a class="lockup" href="index.html" aria-label="FB Code LLC — home">
+        <a class="lockup" href="./" aria-label="FB Code LLC — home">
           <span class="mark" aria-hidden="true"></span>
           <span class="lockup-type">
             <span class="lockup-name">FB Code</span>
@@ -189,37 +216,39 @@
         <div class="footer-col">
           <span class="label">Company</span>
           <ul>
-            <li><a href="services.html">Services</a></li>
-            <li><a href="work.html">Work</a></li>
-            <li><a href="approach.html">Approach</a></li>
-            <li><a href="contact.html">Contact</a></li>
+            <li><a href="services">Services</a></li>
+            <li><a href="work">Work</a></li>
+            <li><a href="approach">Approach</a></li>
+            <li><a href="contact">Contact</a></li>
           </ul>
         </div>
         <div class="footer-col">
           <span class="label">Capabilities</span>
           <ul>
-            <li><a href="services.html#platforms">Scalable platforms</a></li>
-            <li><a href="services.html#automation">Automation</a></li>
-            <li><a href="services.html#process">Process optimization</a></li>
-            <li><a href="services.html#operate">Operate and scale</a></li>
+            <li><a href="services#platforms">Scalable platforms</a></li>
+            <li><a href="services#automation">Automation</a></li>
+            <li><a href="services#process">Process optimization</a></li>
+            <li><a href="services#operate">Operate and scale</a></li>
           </ul>
         </div>
         <div class="footer-col">
           <span class="label">Start</span>
           <ul>
-            <li><a href="contact.html">Send a brief</a></li>
-            <li><a href="approach.html#scope">Book a scope</a></li>
+            <li><a href="./#mapper">Map a process</a></li>
+            <li><a href="contact">Send a brief</a></li>
+            <li><a href="approach#scope">Book a scope</a></li>
           </ul>
         </div>
       </div>
     </div>
     <div class="footer-bottom">
       <p>© <span data-year>2026</span> FB Code LLC. All rights reserved.</p>
-      <p><a href="privacy.html">Privacy</a></p>
+      <p><a href="privacy">Privacy</a></p>
     </div>
   </div>
 </footer>
 
-<script src="assets/js/site.js?v=8"></script>
+<script src="assets/js/site.js?v=9"></script>
+<script src="assets/js/map.js?v=9"></script>
 </body>
 </html>

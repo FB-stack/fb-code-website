@@ -6,8 +6,8 @@
 <title>Privacy — FB Code LLC</title>
 <meta name="description" content="What the FB Code LLC website collects, who processes it, and how to have it deleted.">
 <meta name="theme-color" content="#08080A">
-<link rel="canonical" href="https://fb-code.com/privacy.html">
-<meta property="og:url" content="https://fb-code.com/privacy.html">
+<link rel="canonical" href="https://fb-code.com/privacy">
+<meta property="og:url" content="https://fb-code.com/privacy">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="FB Code LLC">
 <meta property="og:title" content="Privacy — FB Code LLC">
@@ -21,16 +21,27 @@
 (function(){
   var root = document.documentElement;
   root.classList.add("js");
-  var saved = null;
-  try{ saved = localStorage.getItem("fbcode-theme"); }catch(e){}
-  root.setAttribute("data-theme", saved === "light" ? "light" : "dark");
+  var theme = null;
+  var map = null;
+  try{
+    theme = localStorage.getItem("fbcode-theme");
+    map = localStorage.getItem("fbcode-map");
+  }catch(e){}
+  root.setAttribute("data-theme", theme === "light" ? "light" : "dark");
+  if(map){
+    root.classList.add("has-map");
+  }
+  var clean = location.pathname.replace(/(^|\/)index\.html$/, "$1").replace(/\.html$/, "");
+  if(clean !== location.pathname){
+    try{ history.replaceState(null, "", clean + location.search + location.hash); }catch(e){}
+  }
 })();
 </script>
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="preload" href="assets/fonts/inter-tight.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/inter.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/css/site.css?v=8">
+<link rel="stylesheet" href="assets/css/site.css?v=9">
 </head>
 <body>
 
@@ -38,7 +49,7 @@
 
 <header class="site-header">
   <div class="wrap">
-    <a class="lockup" href="index.html" aria-label="FB Code LLC — home">
+    <a class="lockup" href="./" aria-label="FB Code LLC — home">
       <span class="mark" aria-hidden="true"></span>
       <span class="lockup-type">
         <span class="lockup-name">FB Code</span>
@@ -46,17 +57,18 @@
       </span>
     </a>
     <nav class="nav" aria-label="Primary">
-      <a href="services.html">Services</a>
-      <a href="work.html">Work</a>
-      <a href="approach.html">Approach</a>
-      <a href="contact.html">Contact</a>
+      <a href="services">Services</a>
+      <a href="work">Work</a>
+      <a href="approach">Approach</a>
+      <a href="contact">Contact</a>
     </nav>
       <div class="header-tools">
+        <a class="map-chip" href="map" data-map-chip hidden><span data-map-chip-text>Your map</span></a>
         <button class="theme-btn" type="button" data-theme-toggle aria-label="Switch to light theme" title="Switch to light theme" aria-pressed="false">
           <svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.6v2.2M12 19.2v2.2M2.6 12h2.2M19.2 12h2.2M5.4 5.4l1.6 1.6M17 17l1.6 1.6M18.6 5.4L17 7M7 17l-1.6 1.6"/></svg>
           <svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.2 14.9A8.6 8.6 0 0 1 9.1 3.8a8.6 8.6 0 1 0 11.1 11.1Z"/></svg>
         </button>
-        <a class="btn btn--solid header-cta" href="contact.html">Start a project</a>
+        <a class="btn btn--solid header-cta" href="contact">Start a project</a>
         <button class="menu-btn" type="button" data-menu-button aria-expanded="false" aria-controls="mobile-nav" aria-label="Menu">
           <span></span><span></span><span></span>
         </button>
@@ -64,11 +76,12 @@
   </div>
   <div class="mobile-nav" id="mobile-nav" data-menu-panel>
     <div class="wrap">
-      <a href="services.html">Services</a>
-      <a href="work.html">Work</a>
-      <a href="approach.html">Approach</a>
-      <a href="contact.html">Contact</a>
-      <a class="btn btn--solid btn--block" href="contact.html">Start a project</a>
+      <a href="services">Services</a>
+      <a href="work">Work</a>
+      <a href="approach">Approach</a>
+      <a href="contact">Contact</a>
+      <a href="map" data-map-chip hidden>Your map</a>
+      <a class="btn btn--solid btn--block" href="contact">Start a project</a>
     </div>
   </div>
 </header>
@@ -79,9 +92,9 @@
     <div class="aurora" aria-hidden="true"><i></i><i></i><i></i></div>
     <div class="grid-lines" aria-hidden="true"></div>
     <div class="wrap">
-      <p class="crumb"><a href="index.html">Home</a> <span class="sep">/</span> <span>Privacy</span></p>
+      <p class="crumb"><a href="./">Home</a> <span class="sep">/</span> <span>Privacy</span></p>
       <h1>What this site <em>collects.</em></h1>
-      <p class="lede">Short version: a contact form, no analytics, no cookies, no tracking, and nothing sold to anyone.</p>
+      <p class="lede">Short version: a contact form with a spam check, a process map that stays in your browser, no analytics, no cookies of our own, no tracking, and nothing sold to anyone.</p>
     </div>
   </section>
 
@@ -92,30 +105,34 @@
         <p>This page describes what happens to information when you use <strong>fb-code.com</strong>. It covers the website only, not any project we run for a client under a separate agreement.</p>
 
         <h2>What we collect</h2>
-        <p>Only one thing on this site asks you for information: the contact form. If you submit it, we receive your <strong>name, email address, company</strong>, the <strong>topic</strong> you picked, and the <strong>message</strong> you wrote. Nothing else on the site asks you for anything, and there is no account to create.</p>
+        <p>Only one thing on this site sends us information: the contact form. If you submit it, we receive your <strong>name, email address, company</strong>, the <strong>topic</strong> you picked, and the <strong>message</strong> you wrote. There is no account to create.</p>
+        <p>The home page also lets you map a process. What you type there stays in your browser. It reaches us only if you send the contact form while the map is attached, in which case the form also carries <strong>the steps you entered, their timings, and a link that reopens the map</strong>. The contact page shows what is attached and lets you remove it before sending.</p>
 
         <h2>What we do not do</h2>
-        <p>No analytics. No advertising or marketing pixels. No cookies — the site sets none at all. Nothing you do here is profiled, and nothing is sold, rented or shared for anyone else's marketing. Submitting the form does not add you to a mailing list.</p>
+        <p>No analytics. No advertising or marketing pixels. No cookies — this site sets none at all. Nothing you do here is profiled, and nothing is sold, rented or shared for anyone else's marketing. Submitting the form does not add you to a mailing list.</p>
 
         <h2>Who else handles it</h2>
-        <p>Two third parties are involved in running the site. Each has its own privacy terms.</p>
+        <p>Three third parties are involved in running the site. Each has its own privacy terms.</p>
         <ul class="facts">
           <li><span class="k">Formspree</span><span class="v">Receives the contact form and forwards it to us by email. Your message passes through and is stored on their systems. <a href="https://formspree.io/legal/privacy-policy/">Their privacy policy</a>.</span></li>
+          <li><span class="k">Cloudflare Turnstile</span><span class="v">Checks that the contact form is being sent by a person and not a script. It loads only on the contact page, and only once you start filling in the form. Cloudflare then receives your IP address and details about your browser to make that decision, and runs the check in its own frame under its own terms. <a href="https://www.cloudflare.com/privacypolicy/">Cloudflare's privacy policy</a>.</span></li>
           <li><span class="k">GitHub Pages</span><span class="v">Hosts and serves these pages. Like any web server it records request logs, which include your IP address. <a href="https://docs.github.com/site-policy/privacy-policies/github-privacy-statement">GitHub's privacy statement</a>.</span></li>
         </ul>
-        <p>Nothing else is loaded from anywhere. The typefaces, images and scripts are all served from this site, so no font service, tag manager or content network sees your visit.</p>
+        <p>Nothing else is loaded from anywhere. The typefaces, images and the site's own scripts are all served from this site, so no font service, tag manager or content network sees your visit. If you never touch the contact form, the only party that sees it is the host.</p>
 
         <h2>What stays on your device</h2>
         <p>If you switch the site between dark and light, that choice is saved in your browser's local storage under <code>fbcode-theme</code>. It never leaves your device, it is not a cookie, and it is not readable by us. Clearing your browser data removes it.</p>
+        <p>If you change the process map, your version is saved the same way under <code>fbcode-map</code>, so it is still there when you come back and so other pages can show it. Choosing <strong>Reset to the example</strong> on the home page deletes it.</p>
+        <p>A link copied from the map page carries the map inside the link itself, in the part after the <code>#</code>. Browsers do not send that part to a server, so neither we nor our host see it. Anyone you give the link to can read the map.</p>
 
         <h2>How long we keep it</h2>
         <p>Enquiries are kept for as long as we need them to reply and to keep ordinary business records. If an enquiry does not turn into a project, there is no reason for us to hold on to it — ask us to delete yours at any time and we will.</p>
 
         <h2>Your rights</h2>
-        <p>You can ask what we hold about you, ask us to correct it, or ask us to delete it. Use the <a href="contact.html">contact form</a> and say what you want done. Depending on where you live you may also have the right to complain to a data protection authority.</p>
+        <p>You can ask what we hold about you, ask us to correct it, or ask us to delete it. Use the <a href="contact">contact form</a> and say what you want done. Depending on where you live you may also have the right to complain to a data protection authority.</p>
 
         <h2>Who to ask</h2>
-        <p>FB Code LLC runs this site and is responsible for what it collects. For anything about this page, or about information you have sent us, use the <a href="contact.html">contact form</a>.</p>
+        <p>FB Code LLC runs this site and is responsible for what it collects. For anything about this page, or about information you have sent us, use the <a href="contact">contact form</a>.</p>
 
         <h2>Changes</h2>
         <p>If this page changes, the date below changes with it. There is no archive of earlier versions, so if a change matters to you, keep a copy.</p>
@@ -131,7 +148,7 @@
   <div class="wrap">
     <div class="footer-top">
       <div>
-        <a class="lockup" href="index.html" aria-label="FB Code LLC — home">
+        <a class="lockup" href="./" aria-label="FB Code LLC — home">
           <span class="mark" aria-hidden="true"></span>
           <span class="lockup-type">
             <span class="lockup-name">FB Code</span>
@@ -144,37 +161,39 @@
         <div class="footer-col">
           <span class="label">Company</span>
           <ul>
-            <li><a href="services.html">Services</a></li>
-            <li><a href="work.html">Work</a></li>
-            <li><a href="approach.html">Approach</a></li>
-            <li><a href="contact.html">Contact</a></li>
+            <li><a href="services">Services</a></li>
+            <li><a href="work">Work</a></li>
+            <li><a href="approach">Approach</a></li>
+            <li><a href="contact">Contact</a></li>
           </ul>
         </div>
         <div class="footer-col">
           <span class="label">Capabilities</span>
           <ul>
-            <li><a href="services.html#platforms">Scalable platforms</a></li>
-            <li><a href="services.html#automation">Automation</a></li>
-            <li><a href="services.html#process">Process optimization</a></li>
-            <li><a href="services.html#operate">Operate and scale</a></li>
+            <li><a href="services#platforms">Scalable platforms</a></li>
+            <li><a href="services#automation">Automation</a></li>
+            <li><a href="services#process">Process optimization</a></li>
+            <li><a href="services#operate">Operate and scale</a></li>
           </ul>
         </div>
         <div class="footer-col">
           <span class="label">Start</span>
           <ul>
-            <li><a href="contact.html">Send a brief</a></li>
-            <li><a href="approach.html#scope">Book a scope</a></li>
+            <li><a href="./#mapper">Map a process</a></li>
+            <li><a href="contact">Send a brief</a></li>
+            <li><a href="approach#scope">Book a scope</a></li>
           </ul>
         </div>
       </div>
     </div>
     <div class="footer-bottom">
       <p>© <span data-year>2026</span> FB Code LLC. All rights reserved.</p>
-      <p><a href="privacy.html">Privacy</a></p>
+      <p><a href="privacy">Privacy</a></p>
     </div>
   </div>
 </footer>
 
-<script src="assets/js/site.js?v=8"></script>
+<script src="assets/js/site.js?v=9"></script>
+<script src="assets/js/map.js?v=9"></script>
 </body>
 </html>

@@ -6,8 +6,8 @@
 <title>Work — FB Code LLC</title>
 <meta name="description" content="Selected systems FB Code LLC has built, and the process each one replaced.">
 <meta name="theme-color" content="#08080A">
-<link rel="canonical" href="https://fb-code.com/work.html">
-<meta property="og:url" content="https://fb-code.com/work.html">
+<link rel="canonical" href="https://fb-code.com/work">
+<meta property="og:url" content="https://fb-code.com/work">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="FB Code LLC">
 <meta property="og:title" content="Work — FB Code LLC">
@@ -21,16 +21,27 @@
 (function(){
   var root = document.documentElement;
   root.classList.add("js");
-  var saved = null;
-  try{ saved = localStorage.getItem("fbcode-theme"); }catch(e){}
-  root.setAttribute("data-theme", saved === "light" ? "light" : "dark");
+  var theme = null;
+  var map = null;
+  try{
+    theme = localStorage.getItem("fbcode-theme");
+    map = localStorage.getItem("fbcode-map");
+  }catch(e){}
+  root.setAttribute("data-theme", theme === "light" ? "light" : "dark");
+  if(map){
+    root.classList.add("has-map");
+  }
+  var clean = location.pathname.replace(/(^|\/)index\.html$/, "$1").replace(/\.html$/, "");
+  if(clean !== location.pathname){
+    try{ history.replaceState(null, "", clean + location.search + location.hash); }catch(e){}
+  }
 })();
 </script>
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="preload" href="assets/fonts/inter-tight.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/inter.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/css/site.css?v=8">
+<link rel="stylesheet" href="assets/css/site.css?v=9">
 </head>
 <body>
 
@@ -38,7 +49,7 @@
 
 <header class="site-header">
   <div class="wrap">
-    <a class="lockup" href="index.html" aria-label="FB Code LLC — home">
+    <a class="lockup" href="./" aria-label="FB Code LLC — home">
       <span class="mark" aria-hidden="true"></span>
       <span class="lockup-type">
         <span class="lockup-name">FB Code</span>
@@ -46,17 +57,18 @@
       </span>
     </a>
     <nav class="nav" aria-label="Primary">
-      <a href="services.html">Services</a>
-      <a href="work.html" aria-current="page">Work</a>
-      <a href="approach.html">Approach</a>
-      <a href="contact.html">Contact</a>
+      <a href="services">Services</a>
+      <a href="work" aria-current="page">Work</a>
+      <a href="approach">Approach</a>
+      <a href="contact">Contact</a>
     </nav>
       <div class="header-tools">
+        <a class="map-chip" href="map" data-map-chip hidden><span data-map-chip-text>Your map</span></a>
         <button class="theme-btn" type="button" data-theme-toggle aria-label="Switch to light theme" title="Switch to light theme" aria-pressed="false">
           <svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.6v2.2M12 19.2v2.2M2.6 12h2.2M19.2 12h2.2M5.4 5.4l1.6 1.6M17 17l1.6 1.6M18.6 5.4L17 7M7 17l-1.6 1.6"/></svg>
           <svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.2 14.9A8.6 8.6 0 0 1 9.1 3.8a8.6 8.6 0 1 0 11.1 11.1Z"/></svg>
         </button>
-        <a class="btn btn--solid header-cta" href="contact.html">Start a project</a>
+        <a class="btn btn--solid header-cta" href="contact">Start a project</a>
         <button class="menu-btn" type="button" data-menu-button aria-expanded="false" aria-controls="mobile-nav" aria-label="Menu">
           <span></span><span></span><span></span>
         </button>
@@ -64,11 +76,12 @@
   </div>
   <div class="mobile-nav" id="mobile-nav" data-menu-panel>
     <div class="wrap">
-      <a href="services.html">Services</a>
-      <a href="work.html" aria-current="page">Work</a>
-      <a href="approach.html">Approach</a>
-      <a href="contact.html">Contact</a>
-      <a class="btn btn--solid btn--block" href="contact.html">Start a project</a>
+      <a href="services">Services</a>
+      <a href="work" aria-current="page">Work</a>
+      <a href="approach">Approach</a>
+      <a href="contact">Contact</a>
+      <a href="map" data-map-chip hidden>Your map</a>
+      <a class="btn btn--solid btn--block" href="contact">Start a project</a>
     </div>
   </div>
 </header>
@@ -79,7 +92,7 @@
     <div class="aurora" aria-hidden="true"><i></i><i></i><i></i></div>
     <div class="grid-lines" aria-hidden="true"></div>
     <div class="wrap">
-      <p class="crumb"><a href="index.html">Home</a> <span class="sep">/</span> <span>Work</span></p>
+      <p class="crumb"><a href="./">Home</a> <span class="sep">/</span> <span>Work</span></p>
       <h1>What we built, and what it <em>changed.</em></h1>
       <p class="lede">What the process looked like before, and the system we shipped in its place.</p>
     </div>
@@ -115,6 +128,84 @@
           <span class="was" role="cell">A spreadsheet</span>
           <span class="now" role="cell">Totalled per employee and method, ready to reconcile at the end of a shift.</span>
         </div>
+      </div>
+      <div class="demo-lead">
+        <span class="label label--signal">A working model · demo data</span>
+        <p class="lede">A small model of the console on demo doors. Open one and watch the event reach the log. The screens below it are from the system itself.</p>
+      </div>
+      <div class="demo" data-demo>
+        <div class="demo-bar">
+          <span class="demo-lights" aria-hidden="true"></span>
+          <span class="demo-title">Access console</span>
+          <span class="label demo-flag">Demo data</span>
+          <span class="num demo-clock" data-demo-clock aria-hidden="true"></span>
+        </div>
+        <div class="demo-body">
+          <div class="demo-side">
+            <div class="demo-stats">
+              <div><span class="label">Granted</span><strong data-demo-granted>0</strong></div>
+              <div><span class="label">Denied</span><strong data-demo-denied>0</strong></div>
+              <div><span class="label">Open now</span><strong data-demo-open>0</strong></div>
+            </div>
+            <div class="demo-grid">
+              <button class="door spot" type="button" data-door="Main entrance · Site A" aria-pressed="false">
+                <span class="door-icon" aria-hidden="true"><i></i></span>
+                <span class="door-name">Main entrance</span>
+                <span class="label door-site">Site A</span>
+                <span class="door-state" data-door-state>Locked · tap to open</span>
+                <span class="num door-count" data-door-count hidden>0</span>
+              </button>
+              <button class="door spot" type="button" data-door="Side entrance · Site A" aria-pressed="false">
+                <span class="door-icon" aria-hidden="true"><i></i></span>
+                <span class="door-name">Side entrance</span>
+                <span class="label door-site">Site A</span>
+                <span class="door-state" data-door-state>Locked · tap to open</span>
+                <span class="num door-count" data-door-count hidden>0</span>
+              </button>
+              <button class="door spot" type="button" data-door="Lobby turnstile · Site A" aria-pressed="false">
+                <span class="door-icon" aria-hidden="true"><i></i></span>
+                <span class="door-name">Lobby turnstile</span>
+                <span class="label door-site">Site A</span>
+                <span class="door-state" data-door-state>Locked · tap to open</span>
+                <span class="num door-count" data-door-count hidden>0</span>
+              </button>
+              <button class="door spot" type="button" data-door="Warehouse · Site B" aria-pressed="false">
+                <span class="door-icon" aria-hidden="true"><i></i></span>
+                <span class="door-name">Warehouse</span>
+                <span class="label door-site">Site B</span>
+                <span class="door-state" data-door-state>Locked · tap to open</span>
+                <span class="num door-count" data-door-count hidden>0</span>
+              </button>
+              <button class="door spot" type="button" data-door="Dock A · Site B" aria-pressed="false">
+                <span class="door-icon" aria-hidden="true"><i></i></span>
+                <span class="door-name">Dock A</span>
+                <span class="label door-site">Site B</span>
+                <span class="door-state" data-door-state>Locked · tap to open</span>
+                <span class="num door-count" data-door-count hidden>0</span>
+              </button>
+              <button class="door spot" type="button" data-door="Staff room · Site B" aria-pressed="false">
+                <span class="door-icon" aria-hidden="true"><i></i></span>
+                <span class="door-name">Staff room</span>
+                <span class="label door-site">Site B</span>
+                <span class="door-state" data-door-state>Locked · tap to open</span>
+                <span class="num door-count" data-door-count hidden>0</span>
+              </button>
+            </div>
+            <div class="demo-actions">
+              <button class="btn btn--ghost" type="button" data-demo-deny>Try a revoked card</button>
+              <p>Six demo doors on two demo sites. Nothing here is a client's data.</p>
+            </div>
+          </div>
+          <div class="demo-log">
+            <div class="demo-log-head">
+              <span class="label">Live access log</span>
+              <span class="demo-live"><i aria-hidden="true"></i>Listening</span>
+            </div>
+            <p class="demo-empty" data-demo-empty>Open a door. The event lands here.</p>
+            <ol data-demo-log aria-live="polite" aria-label="Door events"></ol>
+          </div>
+        </div>
+        <noscript><p class="form-note" style="padding:0 20px 20px;">This model needs JavaScript. The real screens are on the Work page.</p></noscript>
       </div>
       <div class="work-grid work-grid--feature reveal stagger">
         <article class="work-card">
@@ -205,7 +296,7 @@
         <div>
           <p class="lede">Where a client cannot be named, we can still walk you through the architecture, the constraints, and the measurement on a call. Ask for the closest comparable to your own problem and we will bring it.</p>
           <div class="hero-actions">
-            <a class="btn btn--solid" href="contact.html">Ask for a comparable <span class="arrow">→</span></a>
+            <a class="btn btn--solid" href="contact">Ask for a comparable <span class="arrow">→</span></a>
           </div>
         </div>
       </div>
@@ -218,7 +309,7 @@
         <h2>Your process, next on this <em>page.</em></h2>
         <p>Send the problem. A reply from an engineer within one business day.</p>
       </div>
-      <a class="btn btn--signal" href="contact.html">Start a project <span class="arrow">→</span></a>
+      <a class="btn btn--signal" href="contact">Start a project <span class="arrow">→</span></a>
     </div>
   </section>
 
@@ -228,7 +319,7 @@
   <div class="wrap">
     <div class="footer-top">
       <div>
-        <a class="lockup" href="index.html" aria-label="FB Code LLC — home">
+        <a class="lockup" href="./" aria-label="FB Code LLC — home">
           <span class="mark" aria-hidden="true"></span>
           <span class="lockup-type">
             <span class="lockup-name">FB Code</span>
@@ -241,37 +332,40 @@
         <div class="footer-col">
           <span class="label">Company</span>
           <ul>
-            <li><a href="services.html">Services</a></li>
-            <li><a href="work.html">Work</a></li>
-            <li><a href="approach.html">Approach</a></li>
-            <li><a href="contact.html">Contact</a></li>
+            <li><a href="services">Services</a></li>
+            <li><a href="work">Work</a></li>
+            <li><a href="approach">Approach</a></li>
+            <li><a href="contact">Contact</a></li>
           </ul>
         </div>
         <div class="footer-col">
           <span class="label">Capabilities</span>
           <ul>
-            <li><a href="services.html#platforms">Scalable platforms</a></li>
-            <li><a href="services.html#automation">Automation</a></li>
-            <li><a href="services.html#process">Process optimization</a></li>
-            <li><a href="services.html#operate">Operate and scale</a></li>
+            <li><a href="services#platforms">Scalable platforms</a></li>
+            <li><a href="services#automation">Automation</a></li>
+            <li><a href="services#process">Process optimization</a></li>
+            <li><a href="services#operate">Operate and scale</a></li>
           </ul>
         </div>
         <div class="footer-col">
           <span class="label">Start</span>
           <ul>
-            <li><a href="contact.html">Send a brief</a></li>
-            <li><a href="approach.html#scope">Book a scope</a></li>
+            <li><a href="./#mapper">Map a process</a></li>
+            <li><a href="contact">Send a brief</a></li>
+            <li><a href="approach#scope">Book a scope</a></li>
           </ul>
         </div>
       </div>
     </div>
     <div class="footer-bottom">
       <p>© <span data-year>2026</span> FB Code LLC. All rights reserved.</p>
-      <p><a href="privacy.html">Privacy</a></p>
+      <p><a href="privacy">Privacy</a></p>
     </div>
   </div>
 </footer>
 
-<script src="assets/js/site.js?v=8"></script>
+<script src="assets/js/site.js?v=9"></script>
+<script src="assets/js/map.js?v=9"></script>
+<script src="assets/js/demo.js?v=9"></script>
 </body>
 </html>
