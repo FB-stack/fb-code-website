@@ -12,6 +12,11 @@
 <meta property="og:site_name" content="FB Code LLC">
 <meta property="og:title" content="Approach — FB Code LLC">
 <meta property="og:description" content="How FB Code LLC runs an engagement: map the real process, scope it in writing, build in two-week iterations, then measure against the baseline.">
+<meta property="og:image" content="https://fb-code.com/assets/img/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="FB Code LLC — software that raises your output">
+<meta name="twitter:card" content="summary_large_image">
 <script>
 (function(){
   var root = document.documentElement;
@@ -22,10 +27,10 @@
 })();
 </script>
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Inter+Tight:wght@500;600;700&family=Instrument+Serif:ital@1&family=JetBrains+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="assets/css/site.css?v=3">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preload" href="assets/fonts/inter-tight.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/inter.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/css/site.css?v=8">
 </head>
 <body>
 
@@ -82,48 +87,48 @@
 
   <section class="section section--flush">
     <div class="wrap">
-      <div class="service-rows reveal stagger">
-        <article class="service-row" id="map">
-          <span class="num">01</span>
-          <h3>Map</h3>
-          <div>
-            <p>We sit with the people doing the work and write the real process down, step by step, with timings. Not the documented process — the one that actually happens, including the spreadsheet nobody mentions in meetings.</p>
-            <ul><li>You get the map whether or not we go further.</li></ul>
+      <ol class="timeline timeline--rail reveal stagger">
+        <li class="tl-step" id="map">
+          <div class="tl-head">
+            <span class="num">01</span>
+            <h2>Map</h2>
           </div>
-        </article>
-        <article class="service-row" id="scope">
-          <span class="num">02</span>
-          <h3>Scope</h3>
-          <div>
-            <p>One to two weeks, paid. It ends in a written specification, an architecture, a build plan, and a price for the first phase. The document is yours outright and is useful even if you hand it to another team.</p>
-            <ul><li>No build starts without one.</li></ul>
+          <p>We sit with the people doing the work and write the real process down, step by step, with timings. Not the documented process — the one that actually happens, including the spreadsheet nobody mentions in meetings.</p>
+          <p class="tl-get"><span class="label">The rule</span>You get the map whether or not we go further.</p>
+        </li>
+        <li class="tl-step" id="scope">
+          <div class="tl-head">
+            <span class="num">02</span>
+            <h2>Scope</h2>
           </div>
-        </article>
-        <article class="service-row" id="build">
-          <span class="num">03</span>
-          <h3>Build</h3>
-          <div>
-            <p>Two-week iterations against a board you can see. Every iteration ends with working software deployed somewhere you can use it, and a review session where scope can change.</p>
-            <ul><li>You talk to the engineer writing the code.</li></ul>
+          <p>One to two weeks, paid. It ends in a written specification, an architecture, a build plan, and a price for the first phase. The document is yours outright and is useful even if you hand it to another team.</p>
+          <p class="tl-get"><span class="label">The rule</span>No build starts without one.</p>
+        </li>
+        <li class="tl-step" id="build">
+          <div class="tl-head">
+            <span class="num">03</span>
+            <h2>Build</h2>
           </div>
-        </article>
-        <article class="service-row" id="measure">
-          <span class="num">04</span>
-          <h3>Measure</h3>
-          <div>
-            <p>We take the baseline from the mapping phase and re-measure against it. Cycle time, manual steps removed, rework rate. If a number did not move, that goes in the report too.</p>
-            <ul><li>Agreed before the first commit, not after.</li></ul>
+          <p>Two-week iterations against a board you can see. Every iteration ends with working software deployed somewhere you can use it, and a review session where scope can change.</p>
+          <p class="tl-get"><span class="label">The rule</span>You talk to the engineer writing the code.</p>
+        </li>
+        <li class="tl-step" id="measure">
+          <div class="tl-head">
+            <span class="num">04</span>
+            <h2>Measure</h2>
           </div>
-        </article>
-        <article class="service-row" id="operate">
-          <span class="num">05</span>
-          <h3>Operate</h3>
-          <div>
-            <p>Deployment, monitoring, dependency upgrades, and incident response, with a named engineer who already knows the system. A monthly written note on what changed.</p>
-            <ul><li>Monthly retainer, cancel with notice.</li></ul>
+          <p>We take the baseline from the mapping phase and re-measure against it. Cycle time, manual steps removed, rework rate. If a number did not move, that goes in the report too.</p>
+          <p class="tl-get"><span class="label">The rule</span>Agreed before the first commit, not after.</p>
+        </li>
+        <li class="tl-step" id="operate">
+          <div class="tl-head">
+            <span class="num">05</span>
+            <h2>Operate</h2>
           </div>
-        </article>
-      </div>
+          <p>Deployment, monitoring, dependency upgrades, and incident response, with a named engineer who already knows the system. A monthly written note on what changed.</p>
+          <p class="tl-get"><span class="label">The rule</span>Monthly retainer, cancel with notice.</p>
+        </li>
+      </ol>
     </div>
   </section>
 
@@ -136,14 +141,34 @@
       <div class="measures reveal stagger">
         <div class="measure">
           <h3>Cycle time</h3>
+          <svg class="measure-glyph" viewBox="0 0 120 40" aria-hidden="true" focusable="false">
+            <path class="hot draw" pathLength="1" d="M10 14H110"/>
+            <circle class="dot" cx="6" cy="14" r="3.5"/>
+            <circle class="dot" cx="114" cy="14" r="3.5"/>
+            <path d="M6 26v6h108v-6"/>
+          </svg>
           <p>How long one unit of work takes end to end. The number that says whether the process changed or the work just moved somewhere else.</p>
         </div>
         <div class="measure">
           <h3>Manual steps removed</h3>
+          <svg class="measure-glyph" viewBox="0 0 120 40" aria-hidden="true" focusable="false">
+            <path d="M8 20H112"/>
+            <circle class="dot" cx="8" cy="20" r="3.5"/>
+            <circle class="gone" cx="34" cy="20" r="5"/>
+            <circle class="dot" cx="60" cy="20" r="3.5"/>
+            <circle class="gone" cx="86" cy="20" r="5"/>
+            <circle class="dot" cx="112" cy="20" r="3.5"/>
+          </svg>
           <p>Every hand-off a person no longer performs, counted and costed against the hours it used to take each week.</p>
         </div>
         <div class="measure">
           <h3>Rework rate</h3>
+          <svg class="measure-glyph" viewBox="0 0 120 40" aria-hidden="true" focusable="false">
+            <path d="M6 30H110"/>
+            <path d="M105 25l6 5-6 5"/>
+            <path class="hot draw" pathLength="1" d="M82 30C82 2 38 2 38 22"/>
+            <path class="hot" d="M33 18l5 6 5-6"/>
+          </svg>
           <p>Work that had to be done twice. Automation is only a gain if it does not quietly create a new class of failure.</p>
         </div>
       </div>
@@ -264,6 +289,6 @@
   </div>
 </footer>
 
-<script src="assets/js/site.js?v=3"></script>
+<script src="assets/js/site.js?v=8"></script>
 </body>
 </html>

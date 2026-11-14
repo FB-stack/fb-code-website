@@ -12,6 +12,11 @@
 <meta property="og:site_name" content="FB Code LLC">
 <meta property="og:title" content="Services — FB Code LLC">
 <meta property="og:description" content="Scalable platforms, automation, process optimization, operations, product interfaces, and reporting. What FB Code LLC builds and how an engagement runs.">
+<meta property="og:image" content="https://fb-code.com/assets/img/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="FB Code LLC — software that raises your output">
+<meta name="twitter:card" content="summary_large_image">
 <script>
 (function(){
   var root = document.documentElement;
@@ -22,10 +27,10 @@
 })();
 </script>
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Inter+Tight:wght@500;600;700&family=Instrument+Serif:ital@1&family=JetBrains+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="assets/css/site.css?v=3">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preload" href="assets/fonts/inter-tight.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/inter.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/css/site.css?v=8">
 </head>
 <body>
 
@@ -82,55 +87,59 @@
 
   <section class="section section--flush">
     <div class="wrap">
-      <div class="service-rows reveal stagger">
-        <article class="service-row" id="platforms">
-          <span class="num">01</span>
-          <h3>Scalable platforms</h3>
-          <div>
+      <div class="svc reveal">
+        <nav class="showcase-tabs svc-index" aria-label="Services on this page">
+          <a class="showcase-tab" href="#platforms" data-spy-link aria-current="true"><span class="num">01</span><span class="showcase-tab-title">Scalable platforms</span></a>
+          <a class="showcase-tab" href="#automation" data-spy-link><span class="num">02</span><span class="showcase-tab-title">Automation</span></a>
+          <a class="showcase-tab" href="#process" data-spy-link><span class="num">03</span><span class="showcase-tab-title">Process optimization</span></a>
+          <a class="showcase-tab" href="#operate" data-spy-link><span class="num">04</span><span class="showcase-tab-title">Operate and scale</span></a>
+          <a class="showcase-tab" href="#frontend" data-spy-link><span class="num">05</span><span class="showcase-tab-title">Product interfaces</span></a>
+          <a class="showcase-tab" href="#data" data-spy-link><span class="num">06</span><span class="showcase-tab-title">Data and reporting</span></a>
+        </nav>
+        <div class="svc-list">
+          <article class="svc-item" id="platforms">
+            <span class="num">01</span>
+            <h2>Scalable platforms</h2>
             <p>Most systems are not slow because of the language they are written in. They are slow because the data model, the boundaries, and the deployment were chosen for the first version and never revisited. We design those three first, then build against them.</p>
-            <ul><li>Java and .NET services</li><li>Python and Node services</li><li>Relational and document schema design</li><li>Versioned migrations</li><li>REST and event APIs</li><li>Containerised deploys</li><li>Load and capacity testing</li></ul>
-          </div>
-        </article>
-        <article class="service-row" id="automation">
-          <span class="num">02</span>
-          <h3>Automation</h3>
-          <div>
+            <ul class="svc-tags"><li>Java and .NET services</li><li>Python and Node services</li><li>Relational and document schema design</li><li>Versioned migrations</li><li>REST and event APIs</li><li>Containerised deploys</li><li>Load and capacity testing</li></ul>
+            <a class="section-link" href="contact.html?need=platforms">Start with this →</a>
+          </article>
+          <article class="svc-item" id="automation">
+            <span class="num">02</span>
+            <h2>Automation</h2>
             <p>The expensive part of most operations is the gap between two systems that a person closes by hand — copying a number, chasing an approval, re-keying a document. We close those gaps with software that runs on an event rather than on a reminder.</p>
-            <ul><li>System-to-system integrations</li><li>Event-driven jobs</li><li>Document and data pipelines</li><li>Approval and routing flows</li><li>Scheduled reconciliation</li><li>Third-party API adapters</li></ul>
-          </div>
-        </article>
-        <article class="service-row" id="process">
-          <span class="num">03</span>
-          <h3>Process optimization</h3>
-          <div>
+            <ul class="svc-tags"><li>System-to-system integrations</li><li>Event-driven jobs</li><li>Document and data pipelines</li><li>Approval and routing flows</li><li>Scheduled reconciliation</li><li>Third-party API adapters</li></ul>
+            <a class="section-link" href="contact.html?need=automation">Start with this →</a>
+          </article>
+          <article class="svc-item" id="process">
+            <span class="num">03</span>
+            <h2>Process optimization</h2>
             <p>We start by watching the work, not the wiring diagram. Once the real path is written down with timings, the bottleneck is usually somewhere nobody nominated. Then we decide what is worth automating and what should simply stop being done.</p>
-            <ul><li>Process mapping with timings</li><li>Baseline measurement</li><li>Bottleneck analysis</li><li>Build-or-drop decisions</li><li>Rollout and training</li><li>Before-and-after reporting</li></ul>
-          </div>
-        </article>
-        <article class="service-row" id="operate">
-          <span class="num">04</span>
-          <h3>Operate and scale</h3>
-          <div>
+            <ul class="svc-tags"><li>Process mapping with timings</li><li>Baseline measurement</li><li>Bottleneck analysis</li><li>Build-or-drop decisions</li><li>Rollout and training</li><li>Before-and-after reporting</li></ul>
+            <a class="section-link" href="contact.html?need=process">Start with this →</a>
+          </article>
+          <article class="svc-item" id="operate">
+            <span class="num">04</span>
+            <h2>Operate and scale</h2>
             <p>Software that nobody owns degrades quietly. A retainer keeps a named engineer on the account who already knows the system, so the answer to an incident is a fix rather than an onboarding.</p>
-            <ul><li>Monitoring and alerting</li><li>Incident response</li><li>Dependency and security upgrades</li><li>Performance tuning</li><li>Capacity planning</li><li>Monthly written report</li></ul>
-          </div>
-        </article>
-        <article class="service-row" id="frontend">
-          <span class="num">05</span>
-          <h3>Product interfaces</h3>
-          <div>
+            <ul class="svc-tags"><li>Monitoring and alerting</li><li>Incident response</li><li>Dependency and security upgrades</li><li>Performance tuning</li><li>Capacity planning</li><li>Monthly written report</li></ul>
+            <a class="section-link" href="contact.html?need=operate">Start with this →</a>
+          </article>
+          <article class="svc-item" id="frontend">
+            <span class="num">05</span>
+            <h2>Product interfaces</h2>
             <p>Internal tools get used all day by people who did not choose them. We build the front end with the same care as a customer-facing product, because a tool that fights its operator adds the manual steps back in.</p>
-            <ul><li>React and TypeScript</li><li>Dashboards and back-office tools</li><li>Design systems</li><li>Accessibility to WCAG AA</li><li>Offline-tolerant clients</li><li>Mobile web</li></ul>
-          </div>
-        </article>
-        <article class="service-row" id="data">
-          <span class="num">06</span>
-          <h3>Data and reporting</h3>
-          <div>
+            <ul class="svc-tags"><li>React and TypeScript</li><li>Dashboards and back-office tools</li><li>Design systems</li><li>Accessibility to WCAG AA</li><li>Offline-tolerant clients</li><li>Mobile web</li></ul>
+            <a class="section-link" href="contact.html?need=frontend">Start with this →</a>
+          </article>
+          <article class="svc-item" id="data">
+            <span class="num">06</span>
+            <h2>Data and reporting</h2>
             <p>You cannot optimise a process you cannot see. We put the operational numbers somewhere the people accountable for them can read without asking anyone.</p>
-            <ul><li>Reporting schemas</li><li>Operational dashboards</li><li>Scheduled extracts</li><li>Data quality checks</li><li>Audit trails</li><li>Export and archival</li></ul>
-          </div>
-        </article>
+            <ul class="svc-tags"><li>Reporting schemas</li><li>Operational dashboards</li><li>Scheduled extracts</li><li>Data quality checks</li><li>Audit trails</li><li>Export and archival</li></ul>
+            <a class="section-link" href="contact.html?need=data">Start with this →</a>
+          </article>
+        </div>
       </div>
     </div>
   </section>
@@ -211,6 +220,6 @@
   </div>
 </footer>
 
-<script src="assets/js/site.js?v=3"></script>
+<script src="assets/js/site.js?v=8"></script>
 </body>
 </html>

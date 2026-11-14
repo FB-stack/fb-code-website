@@ -12,6 +12,11 @@
 <meta property="og:site_name" content="FB Code LLC">
 <meta property="og:title" content="Contact — FB Code LLC">
 <meta property="og:description" content="Send FB Code LLC a brief or a process problem. A reply from an engineer within one business day.">
+<meta property="og:image" content="https://fb-code.com/assets/img/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="FB Code LLC — software that raises your output">
+<meta name="twitter:card" content="summary_large_image">
 <script>
 (function(){
   var root = document.documentElement;
@@ -22,10 +27,10 @@
 })();
 </script>
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Inter+Tight:wght@500;600;700&family=Instrument+Serif:ital@1&family=JetBrains+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="assets/css/site.css?v=3">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preload" href="assets/fonts/inter-tight.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/inter.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/css/site.css?v=8">
 </head>
 <body>
 
@@ -92,21 +97,45 @@
             <li><span class="k">Most useful detail</span><span class="v">The process that hurts, and roughly how many people touch it each week.</span></li>
             <li><span class="k">Not needed yet</span><span class="v">A technical specification. That is what the scope phase produces.</span></li>
             <li><span class="k">Budget</span><span class="v">A range is enough. It tells us whether to propose a phase or the whole thing.</span></li>
-            <li><span class="k">Response</span><span class="v">One business day, from an engineer rather than an inbox.</span></li>
-            <li><span class="k">First call</span><span class="v">45 minutes. No deck.</span></li>
           </ul>
+          <div class="section-head">
+            <h2>What happens next</h2>
+            <span class="num">In order</span>
+          </div>
+          <ol class="timeline timeline--stack reveal stagger">
+            <li class="tl-step">
+              <span class="num">01</span>
+              <h3>You write</h3>
+              <p>As much or as little as you have. A rough problem is enough.</p>
+            </li>
+            <li class="tl-step">
+              <span class="num">02</span>
+              <h3>An engineer replies</h3>
+              <p>Within one business day, from an engineer rather than an inbox.</p>
+            </li>
+            <li class="tl-step">
+              <span class="num">03</span>
+              <h3>We talk</h3>
+              <p>45 minutes with the person who would build it. No deck.</p>
+            </li>
+            <li class="tl-step">
+              <span class="num">04</span>
+              <h3>We map and scope</h3>
+              <p>One to two weeks, paid. It ends in a written spec and a build plan you keep either way.</p>
+            </li>
+          </ol>
         </div>
 
-        <form class="form" data-contact-form novalidate>
+        <form class="form" data-contact-form action="https://formspree.io/f/mbggzndn" method="POST">
           <div class="field-row">
             <label class="field">
               <span>Name</span>
-              <input type="text" name="name" autocomplete="name" placeholder="Your name" data-required>
+              <input type="text" name="name" autocomplete="name" placeholder="Your name" required data-required>
               <span class="field-error" aria-live="polite"></span>
             </label>
             <label class="field">
               <span>Email</span>
-              <input type="email" name="email" autocomplete="email" placeholder="you@company.com" data-required>
+              <input type="email" name="email" autocomplete="email" placeholder="you@company.com" required data-required>
               <span class="field-error" aria-live="polite"></span>
             </label>
           </div>
@@ -118,24 +147,32 @@
             </label>
             <label class="field">
               <span>What you need</span>
-              <select name="topic">
-                <option>Scalable platform</option>
-                <option>Automation</option>
-                <option>Process optimization</option>
-                <option>Operate an existing system</option>
+              <select name="topic" data-need-select>
+                <option data-need="platforms">Scalable platform</option>
+                <option data-need="automation">Automation</option>
+                <option data-need="process">Process optimization</option>
+                <option data-need="operate">Operate and scale</option>
+                <option data-need="frontend">Product interface</option>
+                <option data-need="data">Data and reporting</option>
                 <option>Not sure yet</option>
               </select>
             </label>
           </div>
           <label class="field">
             <span>The problem</span>
-            <textarea name="details" rows="6" placeholder="What the process looks like today, who touches it, and what going well would mean." data-required></textarea>
+            <textarea name="details" rows="6" placeholder="What the process looks like today, who touches it, and what going well would mean." required data-required></textarea>
             <span class="field-error" aria-live="polite"></span>
           </label>
           <label class="hp" aria-hidden="true">Leave this empty<input type="text" name="_gotcha" tabindex="-1"></label>
           <button class="btn btn--signal btn--block" type="submit">Send it <span class="arrow">→</span></button>
           <p class="form-note">We reply to every message. Nothing is added to a mailing list.</p>
           <div class="form-status" role="status" aria-live="polite"></div>
+          <div class="form-done" data-form-done tabindex="-1">
+            <span class="form-done-mark" aria-hidden="true"></span>
+            <h2>Message sent.</h2>
+            <p>You will hear back from an engineer within one business day.</p>
+            <button class="btn btn--ghost" type="button" data-form-again>Send another</button>
+          </div>
         </form>
       </div>
     </div>
@@ -191,6 +228,6 @@
   </div>
 </footer>
 
-<script src="assets/js/site.js?v=3"></script>
+<script src="assets/js/site.js?v=8"></script>
 </body>
 </html>

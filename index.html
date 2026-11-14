@@ -12,6 +12,11 @@
 <meta property="og:site_name" content="FB Code LLC">
 <meta property="og:title" content="FB Code LLC — Scalable software, automation, and process optimization">
 <meta property="og:description" content="We build scalable systems, automate the manual work around them, and rebuild the process so your team produces more without adding headcount.">
+<meta property="og:image" content="https://fb-code.com/assets/img/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="FB Code LLC — software that raises your output">
+<meta name="twitter:card" content="summary_large_image">
 <script>
 (function(){
   var root = document.documentElement;
@@ -22,12 +27,12 @@
 })();
 </script>
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Inter+Tight:wght@500;600;700&family=Instrument+Serif:ital@1&family=JetBrains+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="assets/css/site.css?v=3">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preload" href="assets/fonts/inter-tight.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/inter.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/css/site.css?v=8">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"Organization","name":"FB Code LLC","description":"Software development company building scalable solutions, automations, and process optimization.","logo":"assets/img/mark.svg"}
+{"@context":"https://schema.org","@type":"Organization","name":"FB Code LLC","description":"Software development company building scalable solutions, automations, and process optimization.","url":"https://fb-code.com/","logo":"https://fb-code.com/favicon.svg"}
 </script>
 </head>
 <body>
@@ -98,39 +103,150 @@
     </div>
   </section>
 
+  <section class="section" id="work">
+    <div class="wrap reveal">
+      <div class="case-head">
+        <div>
+          <span class="label label--signal">Selected work · Access control</span>
+          <h2>One console for every <em>door.</em></h2>
+        </div>
+        <p class="lede">Doors, controllers and edge devices across several locations, run from one place — with the membership plans, payments and end-of-day reporting that used to live in spreadsheets built into the same system.</p>
+      </div>
+      <div class="showcase" data-showcase>
+        <div class="showcase-tabs" role="tablist" aria-label="Screens from the access-control platform">
+          <button class="showcase-tab" type="button" role="tab" id="tab-overview" aria-controls="shot-overview" aria-selected="true"><span class="num">01</span><span class="showcase-tab-title">Control room</span></button>
+          <button class="showcase-tab" type="button" role="tab" id="tab-dashboard" aria-controls="shot-dashboard" aria-selected="false" tabindex="-1"><span class="num">02</span><span class="showcase-tab-title">Access analytics</span></button>
+          <button class="showcase-tab" type="button" role="tab" id="tab-log" aria-controls="shot-log" aria-selected="false" tabindex="-1"><span class="num">03</span><span class="showcase-tab-title">Live access log</span></button>
+          <button class="showcase-tab" type="button" role="tab" id="tab-plans" aria-controls="shot-plans" aria-selected="false" tabindex="-1"><span class="num">04</span><span class="showcase-tab-title">Plans and pricing</span></button>
+          <button class="showcase-tab" type="button" role="tab" id="tab-payments" aria-controls="shot-payments" aria-selected="false" tabindex="-1"><span class="num">05</span><span class="showcase-tab-title">Payments ledger</span></button>
+          <button class="showcase-tab" type="button" role="tab" id="tab-reports" aria-controls="shot-reports" aria-selected="false" tabindex="-1"><span class="num">06</span><span class="showcase-tab-title">End-of-day close</span></button>
+        </div>
+        <div class="showcase-panels">
+          <figure class="showcase-panel is-active" id="shot-overview" role="tabpanel" aria-labelledby="tab-overview">
+            <button class="shot" type="button" data-zoom="assets/img/work/overview.webp" data-zoom-title="Control room" aria-label="Enlarge screenshot: Control room">
+              <span class="window"><img src="assets/img/work/overview.jpg" srcset="assets/img/work/overview-1000.webp 1000w, assets/img/work/overview.webp 1800w" sizes="(max-width:899px) 92vw, 56vw" alt="Control-room overview with alert banners and KPI cards for members, doors, controllers and edge devices" width="1800" height="904"></span>
+            </button>
+            <figcaption>Offline edge devices, silent controllers and unpaid members surfaced on one screen before anyone has to ask.</figcaption>
+          </figure>
+          <figure class="showcase-panel" id="shot-dashboard" role="tabpanel" aria-labelledby="tab-dashboard">
+            <button class="shot" type="button" data-zoom="assets/img/work/dashboard.webp" data-zoom-title="Access analytics" aria-label="Enlarge screenshot: Access analytics">
+              <span class="window"><img src="assets/img/work/dashboard.jpg" srcset="assets/img/work/dashboard-1000.webp 1000w, assets/img/work/dashboard.webp 1800w" sizes="(max-width:899px) 92vw, 56vw" alt="Analytics dashboard with door openings, rejected attempts, new members and revenue, plus an access-activity chart" loading="lazy" width="1800" height="901"></span>
+            </button>
+            <figcaption>Door openings, rejected attempts, new members and revenue across every site, charted by day and by door.</figcaption>
+          </figure>
+          <figure class="showcase-panel" id="shot-log" role="tabpanel" aria-labelledby="tab-log">
+            <button class="shot" type="button" data-zoom="assets/img/work/access-log.webp" data-zoom-title="Live access log" aria-label="Enlarge screenshot: Live access log">
+              <span class="window"><img src="assets/img/work/access-log.jpg" srcset="assets/img/work/access-log-1000.webp 1000w, assets/img/work/access-log.webp 1800w" sizes="(max-width:899px) 92vw, 56vw" alt="Access log table of granted and denied door events with filters by site, member and door" loading="lazy" width="1800" height="898"></span>
+            </button>
+            <figcaption>Every door event, granted or denied, filterable by site, member and door, with one-click CSV export.</figcaption>
+          </figure>
+          <figure class="showcase-panel" id="shot-plans" role="tabpanel" aria-labelledby="tab-plans">
+            <button class="shot" type="button" data-zoom="assets/img/work/plans.webp" data-zoom-title="Plans and pricing" aria-label="Enlarge screenshot: Plans and pricing">
+              <span class="window"><img src="assets/img/work/plans.jpg" srcset="assets/img/work/plans-1000.webp 1000w, assets/img/work/plans.webp 1800w" sizes="(max-width:899px) 92vw, 56vw" alt="Access plans table with a create-plan dialog and a multi-select door picker" loading="lazy" width="1800" height="902"></span>
+            </button>
+            <figcaption>Paid door bundles, fixed-term or permanent, created and assigned to doors in a single dialog.</figcaption>
+          </figure>
+          <figure class="showcase-panel" id="shot-payments" role="tabpanel" aria-labelledby="tab-payments">
+            <button class="shot" type="button" data-zoom="assets/img/work/payments.webp" data-zoom-title="Payments ledger" aria-label="Enlarge screenshot: Payments ledger">
+              <span class="window"><img src="assets/img/work/payments.jpg" srcset="assets/img/work/payments-1000.webp 1000w, assets/img/work/payments.webp 1800w" sizes="(max-width:899px) 92vw, 56vw" alt="Payments ledger filtered by payment method" loading="lazy" width="1800" height="909"></span>
+            </button>
+            <figcaption>Cash, card and transfer payments recorded against each member and the staff member who took them.</figcaption>
+          </figure>
+          <figure class="showcase-panel" id="shot-reports" role="tabpanel" aria-labelledby="tab-reports">
+            <button class="shot" type="button" data-zoom="assets/img/work/reports.webp" data-zoom-title="End-of-day close" aria-label="Enlarge screenshot: End-of-day close">
+              <span class="window"><img src="assets/img/work/reports.jpg" srcset="assets/img/work/reports-1000.webp 1000w, assets/img/work/reports.webp 1800w" sizes="(max-width:899px) 92vw, 56vw" alt="End-of-day cash report with totals per employee and payment method" loading="lazy" width="1800" height="905"></span>
+            </button>
+            <figcaption>What each employee collected, by method, totalled and ready to reconcile at the end of a shift.</figcaption>
+          </figure>
+        </div>
+      </div>
+      <p class="showcase-more"><a class="section-link" href="work.html#access">Read the case study →</a></p>
+    </div>
+  </section>
+
+  <section class="section section--flush" id="difference">
+    <div class="wrap reveal">
+      <div class="case-head">
+        <div>
+          <span class="label">What the work is for</span>
+          <h2>The same process, minus the <em>waiting.</em></h2>
+        </div>
+        <p class="lede">The expensive part of most operations is the gap between two systems that a person closes by hand — copying a number, chasing an approval, re-keying a document. We close those gaps with software that runs on an event rather than on a reminder.</p>
+      </div>
+      <div class="flow" role="img" aria-label="Illustration: the same five-step process run twice. By hand, the work stops and waits at every hand-off. Automated, it passes straight through.">
+        <div class="flow-lane flow-lane--before">
+          <div class="flow-head"><span class="label">Before</span><strong>By hand</strong></div>
+          <div class="flow-track">
+            <div class="flow-rail"><i></i></div>
+            <span class="flow-node">Order in</span>
+            <span class="flow-node">Copied across</span>
+            <span class="flow-node">Waits for approval</span>
+            <span class="flow-node">Re-keyed</span>
+            <span class="flow-node">Done</span>
+          </div>
+        </div>
+        <div class="flow-lane flow-lane--after">
+          <div class="flow-head"><span class="label label--signal">After</span><strong>On an event</strong></div>
+          <div class="flow-track">
+            <div class="flow-rail"><i></i></div>
+            <span class="flow-node">Order in</span>
+            <span class="flow-node">Synced</span>
+            <span class="flow-node">Routed</span>
+            <span class="flow-node">Posted</span>
+            <span class="flow-node">Done</span>
+          </div>
+        </div>
+      </div>
+      <p class="flow-note"><span class="label">Illustration</span>We agree three measures before the first commit — cycle time, manual steps removed and rework rate — and report against them. <a class="section-link" href="approach.html#measure">How we measure →</a></p>
+    </div>
+  </section>
+
   <section class="section" id="services">
     <div class="wrap reveal">
-      <div class="section-head">
-        <h2>What we <em>do</em></h2>
-        <span class="label">Four capabilities</span>
-      </div>
-    </div>
-    <div class="wrap">
-      <div class="services reveal stagger">
-        <article class="service card">
-          <span class="mark glyph" aria-hidden="true"></span>
-          <span class="num">01</span>
-          <h3>Scalable platforms</h3>
-          <p>APIs, data models, and infrastructure sized for where you are going rather than where you are. Built to hold at ten times the volume without a rewrite.</p>
-        </article>
-        <article class="service card">
-          <span class="mark glyph" aria-hidden="true"></span>
-          <span class="num">02</span>
-          <h3>Automation</h3>
-          <p>The manual steps between your systems: integrations, event-driven jobs, document and data pipelines, approval flows that no longer wait on a person.</p>
-        </article>
-        <article class="service card">
-          <span class="mark glyph" aria-hidden="true"></span>
-          <span class="num">03</span>
-          <h3>Process optimization</h3>
-          <p>We map how the work actually moves, measure where it stalls, then rebuild those parts around the software we ship — not around an org chart.</p>
-        </article>
-        <article class="service card">
-          <span class="mark glyph" aria-hidden="true"></span>
-          <span class="num">04</span>
-          <h3>Operate and scale</h3>
-          <p>Monitoring, upgrades, and a named engineer on the account. A monthly note on what changed, what broke, and what it removed from the day.</p>
-        </article>
+      <div class="split">
+        <div class="split-lead">
+          <h2>What we <em>do</em></h2>
+          <p class="lede">Every engagement is some combination of these six. We would rather say no to the rest than learn it on your budget.</p>
+          <a class="section-link" href="services.html">All services →</a>
+        </div>
+        <div class="caps reveal stagger">
+          <a class="cap" href="services.html#platforms">
+            <span class="num">01</span>
+            <h3>Scalable platforms</h3>
+            <p>APIs, data models and infrastructure built to hold at ten times the volume without a rewrite.</p>
+            <span class="arrow" aria-hidden="true">→</span>
+          </a>
+          <a class="cap" href="services.html#automation">
+            <span class="num">02</span>
+            <h3>Automation</h3>
+            <p>The manual steps between your systems, run on an event rather than on a reminder.</p>
+            <span class="arrow" aria-hidden="true">→</span>
+          </a>
+          <a class="cap" href="services.html#process">
+            <span class="num">03</span>
+            <h3>Process optimization</h3>
+            <p>We map how the work actually moves, measure where it stalls, then rebuild those parts.</p>
+            <span class="arrow" aria-hidden="true">→</span>
+          </a>
+          <a class="cap" href="services.html#operate">
+            <span class="num">04</span>
+            <h3>Operate and scale</h3>
+            <p>Monitoring, upgrades and a named engineer on the account who already knows the system.</p>
+            <span class="arrow" aria-hidden="true">→</span>
+          </a>
+          <a class="cap" href="services.html#frontend">
+            <span class="num">05</span>
+            <h3>Product interfaces</h3>
+            <p>Internal tools built with the same care as a customer-facing product.</p>
+            <span class="arrow" aria-hidden="true">→</span>
+          </a>
+          <a class="cap" href="services.html#data">
+            <span class="num">06</span>
+            <h3>Data and reporting</h3>
+            <p>The operational numbers, readable by the people accountable for them without asking anyone.</p>
+            <span class="arrow" aria-hidden="true">→</span>
+          </a>
+        </div>
       </div>
     </div>
   </section>
@@ -138,84 +254,88 @@
   <section class="section paper" id="approach">
     <div class="wrap reveal">
       <div class="section-head">
-        <h2>How we work</h2>
+        <h2>How we <em>work</em></h2>
         <a class="section-link" href="approach.html">The full method →</a>
       </div>
     </div>
     <div class="wrap">
-      <div class="steps reveal stagger">
-        <article class="step card">
-          <span class="label">Step 01</span>
+      <ol class="timeline reveal stagger">
+        <li class="tl-step">
+          <span class="num">01</span>
           <h3>Map</h3>
-          <p>We sit with the people doing the work and write down the real process, step by step, with timings. Nothing gets specified yet.</p>
-        </article>
-        <article class="step card">
-          <span class="label">Step 02</span>
+          <p>We sit with the people doing the work and write the real process down, step by step, with timings.</p>
+          <p class="tl-get"><span class="label">You keep</span>The process map, whether or not we go further.</p>
+        </li>
+        <li class="tl-step">
+          <span class="num">02</span>
           <h3>Scope</h3>
-          <p>A written spec, an architecture, and a build plan you own outright — useful to you even if someone else builds it.</p>
-        </article>
-        <article class="step card">
-          <span class="label">Step 03</span>
+          <p>A written spec, an architecture and a build plan — useful to you even if someone else builds it.</p>
+          <p class="tl-get"><span class="label">You keep</span>The spec and plan, yours outright.</p>
+        </li>
+        <li class="tl-step">
+          <span class="num">03</span>
           <h3>Build</h3>
-          <p>Two-week iterations against a shared board. Working software at the end of each one, deployed where you can actually use it.</p>
-        </article>
-        <article class="step card">
-          <span class="label">Step 04</span>
+          <p>Two-week iterations against a board you can see, with a review session where scope can change.</p>
+          <p class="tl-get"><span class="label">You keep</span>Working software at the end of each iteration.</p>
+        </li>
+        <li class="tl-step">
+          <span class="num">04</span>
+          <h3>Measure</h3>
+          <p>We re-measure against the baseline from the map: cycle time, manual steps removed, rework rate.</p>
+          <p class="tl-get"><span class="label">You keep</span>A before-and-after report, including what did not move.</p>
+        </li>
+        <li class="tl-step">
+          <span class="num">05</span>
           <h3>Operate</h3>
-          <p>Deployment, monitoring, and handover documentation your own team can take the system over from whenever it wants to.</p>
-        </article>
-      </div>
+          <p>Deployment, monitoring, upgrades and incident response from an engineer who already knows the system.</p>
+          <p class="tl-get"><span class="label">You keep</span>Runbooks and access your team owns from day one.</p>
+        </li>
+      </ol>
     </div>
   </section>
 
-  <section class="section" id="measure">
+  <section class="section" id="faq">
     <div class="wrap reveal">
-      <div class="section-head">
-        <h2>How we prove it <em>moved</em></h2>
-        <span class="label">Three measures</span>
-      </div>
       <div class="split">
-        <p class="lede">Output is a number, not a feeling. We agree the baseline before the first commit, so the result is not a matter of opinion afterwards.</p>
-        <div class="measures reveal stagger">
-          <div class="measure">
-            <h3>Cycle time</h3>
-            <p>How long one unit of work takes end to end, before and after. The number that says whether the process changed or just moved.</p>
-          </div>
-          <div class="measure">
-            <h3>Manual steps removed</h3>
-            <p>Every hand-off a person no longer performs, counted and costed against the hours it used to take each week.</p>
-          </div>
-          <div class="measure">
-            <h3>Rework rate</h3>
-            <p>Work that had to be done twice. Automation is only a gain if it does not quietly create a new class of failure.</p>
-          </div>
+        <div class="split-lead">
+          <h2>Before you <em>ask</em></h2>
+          <p class="lede">How an engagement starts, what it asks of you, and what you are left with.</p>
+          <a class="section-link" href="contact.html">Ask something else →</a>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section" id="work">
-    <div class="wrap reveal">
-      <div class="section-head">
-        <h2>Selected <em>work</em></h2>
-        <a class="section-link" href="work.html">All projects →</a>
-      </div>
-      <div class="work-grid reveal stagger">
-        <a class="work-card" href="work.html#access">
-          <div class="work-thumb"><div class="window"><img src="assets/img/work/dashboard.jpg" alt="Analytics dashboard with door openings, rejected attempts, new members and revenue, plus an access-activity chart" loading="lazy" width="1800" height="901"></div></div>
-          <h3>Access analytics</h3>
-          <p>Access control · door openings, rejected attempts and revenue across every site, by day.</p>
-        </a>
-        <a class="work-card" href="work.html#access">
-          <div class="work-thumb"><div class="window"><img src="assets/img/work/access-log.jpg" alt="Access log table of granted and denied door events with filters by site, member and door" loading="lazy" width="1800" height="898"></div></div>
-          <h3>Live access log</h3>
-          <p>Access control · every door event, granted or denied, filterable and exportable.</p>
-        </a>
-        <a class="work-card" href="work.html#access">
-          <div class="work-thumb"><div class="window"><img src="assets/img/work/plans.jpg" alt="Access plans table with a create-plan dialog and a multi-select door picker" loading="lazy" width="1800" height="902"></div></div>
-          <h3>Plans and pricing</h3>
-          <p>Membership · paid door bundles, fixed-term or permanent, assigned in one step.</p>
-        </a>
+        <div class="faq reveal stagger">
+          <details>
+            <summary>Do we need a specification before we talk?</summary>
+            <p>No. A technical specification is what the scope phase produces. The most useful thing to bring is the process that hurts, and roughly how many people touch it each week.</p>
+          </details>
+          <details>
+            <summary>What happens on the first call?</summary>
+            <p>45 minutes with the person who would build it. No deck and no sales engineer.</p>
+          </details>
+          <details>
+            <summary>What do we get from the scope phase, and what if we stop there?</summary>
+            <p>One to two weeks, paid. It ends in a written specification, an architecture, a build plan and a price for the first phase. The document is yours outright and is useful even if you hand it to another team.</p>
+          </details>
+          <details>
+            <summary>How soon do we see working software?</summary>
+            <p>At the end of the first two-week iteration after scope is signed. Every iteration after that ends the same way, with a review session where scope can change.</p>
+          </details>
+          <details>
+            <summary>How much of our time does a build take?</summary>
+            <p>One review session per iteration, plus questions in a shared channel.</p>
+          </details>
+          <details>
+            <summary>Which technologies do you work in?</summary>
+            <p>Java, .NET, Python or Node on the backend; PostgreSQL, SQL Server or MongoDB for data; React and TypeScript on the front end; containerised and declared in Terraform. Chosen for the team that will maintain it, not for novelty.</p>
+          </details>
+          <details>
+            <summary>What happens after launch?</summary>
+            <p>Documentation and a walkthrough with your team, whether or not you take a retainer. If you do, a named engineer who already knows the system stays on the account, on a monthly retainer you can cancel with notice.</p>
+          </details>
+          <details>
+            <summary>Can you show work closer to our problem?</summary>
+            <p>Some of it is under NDA. Where a client cannot be named, we can still walk you through the architecture and the constraints on a call. Ask for the closest comparable and we will bring it.</p>
+          </details>
+        </div>
       </div>
     </div>
   </section>
@@ -317,6 +437,6 @@
   </div>
 </footer>
 
-<script src="assets/js/site.js?v=3"></script>
+<script src="assets/js/site.js?v=8"></script>
 </body>
 </html>
