@@ -158,9 +158,13 @@ arithmetic; the site still makes no claim about results.
   same figures are written into `index.html` and `map.html` for visitors without
   JavaScript, so change both together.
 - The map is saved in the visitor's browser (`localStorage`, `fbcode-map`). It reaches you
-  only when they send the contact form with it attached: the enquiry then carries
-  `process_map` (a plain-text summary) and `process_map_link` (a link that reopens it on
-  `/map`). "Do not send it" on the contact page detaches it for that message.
+  only when they send the contact form with it attached: the summary and a link that
+  reopens it on `/map` are added to the end of the message text (`foldMapIntoMessage` in
+  `site.js`), so they arrive wherever the message does. "Do not send it" on the contact
+  page detaches it for that message.
+- Only a map the visitor has changed is attached. While the mapper still shows the
+  untouched example, the button under the totals reads "Start a brief", and it becomes
+  "Send this map with your brief" after the first edit.
 - `/map` is the one-page version: printable, and shareable by a link that holds the whole
   map after the `#`, so nothing is stored on a server.
 - Once a visitor has a map, the header shows a "Your map" chip on every page, Services

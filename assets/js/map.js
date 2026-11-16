@@ -24,6 +24,11 @@ const BY_HAND = "By hand";
 const AUTOMATIC = "Automatic";
 const NEW_STEP = {name: "New step", byHand: true, minutes: 5, wait: 0};
 
+/* Only a map the visitor has changed is attached to an enquiry, so the button
+   promises to send one only once there is one. */
+const SEND_OWN = "Send this map with your brief";
+const SEND_EXAMPLE = "Start a brief";
+
 const EXAMPLE_MAP = {
   unit: "order",
   runs: 40,
@@ -356,6 +361,7 @@ function initMapper(){
   const paint = () => {
     renderResult(root, map);
     root.classList.toggle("is-own", own);
+    setText(root, "[data-map-send]", own ? SEND_OWN : SEND_EXAMPLE);
     if(note){
       note.textContent = own ? "Saved in this browser only. Nothing is sent until you send it." : "This is an example. Change it to one process you run.";
     }
@@ -589,8 +595,8 @@ function initMapAttach(){
   const attach = (map) => {
     const attached = map !== null;
     page.classList.toggle("has-map", attached);
-    hiddenField(form, "process_map", attached ? mapAsText(map) : "");
-    hiddenField(form, "process_map_link", attached ? MapStore.link(map) : "");
+    hiddenField(form, MAP_FIELD, attached ? mapAsText(map) : "");
+    hiddenField(form, MAP_LINK_FIELD, attached ? MapStore.link(map) : "");
     if(submit){
       submit.textContent = attached ? "Send map and brief" : plainLabel;
     }

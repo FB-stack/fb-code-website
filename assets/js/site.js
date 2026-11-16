@@ -50,6 +50,12 @@ const SPY_MARGIN = "-30% 0px -60% 0px";
 
 const NEED_PARAM = "need";
 
+/* map.js fills these two hidden fields when a visitor's process map is attached.
+   They are folded into the message itself, so the map arrives wherever the message does. */
+const MAP_FIELD = "process_map";
+const MAP_LINK_FIELD = "process_map_link";
+const MESSAGE_FIELD = "details";
+
 /* Cloudflare Turnstile. The site key lives on the [data-captcha] slot in contact.html;
    an empty key leaves the check off. */
 const CAPTCHA_SCRIPT = "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit";
@@ -668,6 +674,18 @@ function initNeed(){
   }
 }
 
+function foldMapIntoMessage(payload){
+  if(Str.notBlank(payload[MAP_FIELD])){
+    const lines = [payload[MESSAGE_FIELD], "", "PROCESS MAP, ATTACHED FROM THE SITE", payload[MAP_FIELD]];
+    if(Str.notBlank(payload[MAP_LINK_FIELD])){
+      lines.push("", `Reopen it: ${payload[MAP_LINK_FIELD]}`);
+    }
+    payload[MESSAGE_FIELD] = lines.join("\n");
+  }
+  delete payload[MAP_FIELD];
+  delete payload[MAP_LINK_FIELD];
+}
+
 function initForm(){
   const form = document.querySelector("[data-contact-form]");
   if(!form){
@@ -709,6 +727,8 @@ function initForm(){
         payload[key] = String(value).trim();
       }
     });
+
+    foldMapIntoMessage(payload);
 
     if(captcha.enabled && Str.blank(payload[CAPTCHA_FIELD])){
       setStatus(form, CAPTCHA_PENDING, true);
